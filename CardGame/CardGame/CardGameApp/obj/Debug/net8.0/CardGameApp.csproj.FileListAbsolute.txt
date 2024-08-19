@@ -1,0 +1,15 @@
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\bin\Debug\net8.0\CardGameApp.exe
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\bin\Debug\net8.0\CardGameApp.deps.json
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\bin\Debug\net8.0\CardGameApp.runtimeconfig.json
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\bin\Debug\net8.0\CardGameApp.dll
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\bin\Debug\net8.0\CardGameApp.pdb
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\CardGameApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\CardGameApp.AssemblyInfoInputs.cache
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\CardGameApp.AssemblyInfo.cs
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\CardGameApp.csproj.CoreCompileInputs.cache
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\CardGameApp.sourcelink.json
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\CardGameApp.dll
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\refint\CardGameApp.dll
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\CardGameApp.pdb
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\CardGameApp.genruntimeconfig.cache
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGameApp\obj\Debug\net8.0\ref\CardGameApp.dll

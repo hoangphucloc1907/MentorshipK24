@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jOgwfCRMaCZygSYWfhWRwPReon8PfJyaVq4RZvwoy3nWKs64oz5ZlXcmI93ra0WYRy5l0ntgRTb/Z3QGekMjDw==",
+  "dgSpecHash": "E/eQGIORgZXRCN/LN0tOAnBjHZkJvTsG/BPUxPpNM7RlMAzGep0OFPI1KrvDch+5OWCOFdoUA3v4OwmoUtI/eg==",
   "success": true,
-  "projectFilePath": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGame\\CardGame.csproj",
+  "projectFilePath": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGame\\CardGame.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\loczxph\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\loczxph\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",

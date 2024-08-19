@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A50E6EFC-381B-4505-A9F7-E1686C80577E}|CardGame\\CardGame.csproj|c:\\loc\\mentorshipk24\\cardgame\\cardgame\\cardgame\\deck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A50E6EFC-381B-4505-A9F7-E1686C80577E}|CardGame\\CardGame.csproj|solutionrelative:cardgame\\deck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A50E6EFC-381B-4505-A9F7-E1686C80577E}|CardGame\\CardGame.Test.csproj|C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\cardgame\\cardgametest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A50E6EFC-381B-4505-A9F7-E1686C80577E}|CardGame\\CardGame.Test.csproj|solutionrelative:cardgame\\cardgametest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A50E6EFC-381B-4505-A9F7-E1686C80577E}|CardGame\\CardGame.csproj|C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\cardgame\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A50E6EFC-381B-4505-A9F7-E1686C80577E}|CardGame\\CardGame.csproj|solutionrelative:cardgame\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE134A6D-3307-4752-AB53-5FAA5DA98FC4}|CardGameApp\\CardGameApp.csproj|c:\\loc\\mentorshipk24\\cardgame\\cardgame\\cardgameapp\\deck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE134A6D-3307-4752-AB53-5FAA5DA98FC4}|CardGameApp\\CardGameApp.csproj|solutionrelative:cardgameapp\\deck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE134A6D-3307-4752-AB53-5FAA5DA98FC4}|CardGameApp\\CardGameApp.csproj|C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\cardgameapp\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE134A6D-3307-4752-AB53-5FAA5DA98FC4}|CardGameApp\\CardGameApp.csproj|solutionrelative:cardgameapp\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE134A6D-3307-4752-AB53-5FAA5DA98FC4}|CardGameApp\\CardGameApp.csproj|C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\cardgameapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE134A6D-3307-4752-AB53-5FAA5DA98FC4}|CardGameApp\\CardGameApp.csproj|solutionrelative:cardgameapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE134A6D-3307-4752-AB53-5FAA5DA98FC4}|CardGameApp\\CardGameApp.csproj|C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\cardgameapp\\cardgameapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EE134A6D-3307-4752-AB53-5FAA5DA98FC4}|CardGameApp\\CardGameApp.csproj|solutionrelative:cardgameapp\\cardgameapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A50E6EFC-381B-4505-A9F7-E1686C80577E}|CardGame\\CardGame.csproj|C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\cardgame\\cardgametest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,36 +34,74 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CardGameApp.csproj",
+              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGameApp\\CardGameApp.csproj",
+              "RelativeDocumentMoniker": "CardGameApp\\CardGameApp.csproj",
+              "ToolTip": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGameApp\\CardGameApp.csproj",
+              "RelativeToolTip": "CardGameApp\\CardGameApp.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-08-09T17:25:55.983Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Deck.cs",
-              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGame\\Deck.cs",
-              "RelativeDocumentMoniker": "CardGame\\Deck.cs",
-              "ToolTip": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGame\\Deck.cs",
-              "RelativeToolTip": "CardGame\\Deck.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAxwAgAAAAAAAAA",
+              "Title": "CardGameTest.cs",
+              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGame\\CardGameTest.cs",
+              "RelativeDocumentMoniker": "CardGame\\CardGameTest.cs",
+              "ToolTip": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGame\\CardGameTest.cs",
+              "RelativeToolTip": "CardGame\\CardGameTest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-09T15:19:21.192Z",
+              "WhenOpened": "2024-08-09T17:21:51.327Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Card.cs",
+              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGameApp\\Card.cs",
+              "RelativeDocumentMoniker": "CardGameApp\\Card.cs",
+              "ToolTip": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGameApp\\Card.cs",
+              "RelativeToolTip": "CardGameApp\\Card.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-09T17:23:50.333Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Card.cs",
-              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGame\\Card.cs",
-              "RelativeDocumentMoniker": "CardGame\\Card.cs",
-              "ToolTip": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGame\\Card.cs",
-              "RelativeToolTip": "CardGame\\Card.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAJAAAA",
+              "Title": "Deck.cs",
+              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGameApp\\Deck.cs",
+              "RelativeDocumentMoniker": "CardGameApp\\Deck.cs",
+              "ToolTip": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGameApp\\Deck.cs",
+              "RelativeToolTip": "CardGameApp\\Deck.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwAoAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-09T14:08:43.693Z"
+              "WhenOpened": "2024-08-09T17:23:44.961Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGameApp\\Program.cs",
+              "RelativeDocumentMoniker": "CardGameApp\\Program.cs",
+              "ToolTip": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGameApp\\Program.cs",
+              "RelativeToolTip": "CardGameApp\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-09T17:23:10.948Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "CardGameTest.cs",
               "DocumentMoniker": "C:\\Loc\\MentorshipK24\\CardGame\\CardGame\\CardGame\\CardGameTest.cs",
               "RelativeDocumentMoniker": "CardGame\\CardGameTest.cs",

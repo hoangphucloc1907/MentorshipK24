@@ -1,4 +1,6 @@
-namespace CardGame
+using CardGameApp;
+
+namespace CardGameTest
 {
     public class CardTest
     {
@@ -6,15 +8,11 @@ namespace CardGame
         public void Card_Should_Return_Correct_Value_And_Suit()
         {
             // Arrange
-            var card = new Card("A", "Hearts");
-
-            //Act
-             var value = card.Value;
-             var suit = card.Suit;
+            var card = new Card(Suit.Hearts, Rank.Ace);
 
             // Assert
-            Assert.Equal("A", value);
-            Assert.Equal("Hearts", suit);
+            Assert.Equal(Suit.Hearts, card.Suit);
+            Assert.Equal(Rank.Ace, card.Rank);
         }
     }
 

@@ -1,4 +1,4 @@
-﻿namespace CardGame
+﻿namespace CardGameApp
 {
     public class Deck
     {
@@ -10,14 +10,11 @@
         public Deck()
         {
             _cards = new List<Card>();
-            var suits = new[] { "Hearts", "Diamonds", "Clubs", "Spades" };
-            var values = new[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-
-            foreach (var suit in suits)
+            foreach (Suit suit in Enum.GetValues(typeof(Suit)))
             {
-                foreach (var value in values)
+                foreach (Rank rank in Enum.GetValues(typeof(Rank)))
                 {
-                    _cards.Add(new Card(value, suit));
+                    _cards.Add(new Card(suit, rank));
                 }
             }
         }

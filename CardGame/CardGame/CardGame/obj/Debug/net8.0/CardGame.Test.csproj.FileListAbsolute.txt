@@ -1,0 +1,7 @@
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGame\bin\Debug\net8.0\CoverletSourceRootsMapping_CardGame.Test
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGame\obj\Debug\net8.0\CardGame.Test.csproj.AssemblyReference.cache
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGame\obj\Debug\net8.0\CardGame.Test.GeneratedMSBuildEditorConfig.editorconfig
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGame\obj\Debug\net8.0\CardGame.Test.AssemblyInfoInputs.cache
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGame\obj\Debug\net8.0\CardGame.Test.AssemblyInfo.cs
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGame\obj\Debug\net8.0\CardGame.Test.csproj.CoreCompileInputs.cache
+C:\Loc\MentorshipK24\CardGame\CardGame\CardGame\obj\Debug\net8.0\CardGame.Test.sourcelink.json
