@@ -1,0 +1,6 @@
+@LinqFramework_HostAddress = http://localhost:5261
+
+GET {{LinqFramework_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
