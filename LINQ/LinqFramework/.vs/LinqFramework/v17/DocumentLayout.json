@@ -6,8 +6,8 @@
       "AbsoluteMoniker": "D:0:0:{13757ACC-0690-4965-9970-D3C459EF3823}|..\\LinqFramework.Test\\LinqFramework.Test.csproj|c:\\loc\\mentorshipk24\\linq\\linqframework.test\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2142D6B-63B8-46B3-AA30-B01F9C8F7D45}|LinqFramework.csproj|c:\\loc\\mentorshipk24\\linq\\linqframework\\extention\\linq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2142D6B-63B8-46B3-AA30-B01F9C8F7D45}|LinqFramework.csproj|solutionrelative:extention\\linq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2142D6B-63B8-46B3-AA30-B01F9C8F7D45}|LinqFramework.csproj|c:\\loc\\mentorshipk24\\linq\\linqframework\\linq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2142D6B-63B8-46B3-AA30-B01F9C8F7D45}|LinqFramework.csproj|solutionrelative:linq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,7 +27,7 @@
               "RelativeDocumentMoniker": "..\\LinqFramework.Test\\UnitTest1.cs",
               "ToolTip": "C:\\Loc\\MentorshipK24\\LINQ\\LinqFramework.Test\\UnitTest1.cs",
               "RelativeToolTip": "..\\LinqFramework.Test\\UnitTest1.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAwHoAAAAUAAAA",
+              "ViewState": "AQIAAJYBAAAAAAAAAAAkwIsBAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-12T10:49:34.691Z",
               "IsPinned": true,
@@ -37,13 +37,13 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Linq.cs",
-              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\LINQ\\LinqFramework\\Extention\\Linq.cs",
-              "RelativeDocumentMoniker": "Extention\\Linq.cs",
-              "ToolTip": "C:\\Loc\\MentorshipK24\\LINQ\\LinqFramework\\Extention\\Linq.cs",
-              "RelativeToolTip": "Extention\\Linq.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAgwAoAAAARAAAA",
+              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\LINQ\\LinqFramework\\Linq.cs",
+              "RelativeDocumentMoniker": "Linq.cs",
+              "ToolTip": "C:\\Loc\\MentorshipK24\\LINQ\\LinqFramework\\Linq.cs",
+              "RelativeToolTip": "Linq.cs",
+              "ViewState": "AQIAAJYAAAAAAAAAAAAowKsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T10:52:48.518Z",
+              "WhenOpened": "2024-09-16T09:08:01.169Z",
               "EditorCaption": ""
             }
           ]

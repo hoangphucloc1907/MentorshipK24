@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LinqFramework.Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf74b37a94072d31c3772c1a03af435ada4cfd8a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28f7bd65bd619e17a3ea648a9ec7b881663159eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("LinqFramework.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LinqFramework.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
