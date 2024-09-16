@@ -1,4 +1,4 @@
-@LinqFramework_HostAddress = http://localhost:5261
+@LinqFramework_HostAddress = http://localhost:5140
 
 GET {{LinqFramework_HostAddress}}/weatherforecast/
 Accept: application/json
