@@ -1,10 +1,17 @@
+<<<<<<< HEAD
 using LinqFramework;
-using System.Linq;
+=======
+using LinqFramework.Extention;
+>>>>>>> c0137ef503372a374be3ada7684eb76bca9e90dd
 
 namespace LinqFramework.Test
 {
     [TestClass]
+<<<<<<< HEAD
     public class WhereSelectFirstTest
+=======
+    public class UnitTest1
+>>>>>>> c0137ef503372a374be3ada7684eb76bca9e90dd
     {
         [TestMethod]
         public void TestWhereShouldReturnItemsThatMeetCondition()
@@ -119,7 +126,11 @@ namespace LinqFramework.Test
     }
 
     [TestClass]
+<<<<<<< HEAD
     public class FilteringOperatorOfTypeTest
+=======
+    public class FilteringOperatorOfType
+>>>>>>> c0137ef503372a374be3ada7684eb76bca9e90dd
     {
         [TestMethod]
         public void TestOfTypeShouldFilterStringsFromMixedArray()
@@ -129,6 +140,7 @@ namespace LinqFramework.Test
 
             // Act
             var result = mixedList.OfType<string>();
+<<<<<<< HEAD
             var expected = new[] { "One", "Two" };
             // Assert
             Assert.AreEqual(2, result.Length);
@@ -418,11 +430,17 @@ namespace LinqFramework.Test
 
             // Assert
             CollectionAssert.AreEquivalent(expected, distinctStudents);
+=======
+
+            // Assert
+
+>>>>>>> c0137ef503372a374be3ada7684eb76bca9e90dd
         }
     }
 
     public class Student
     {
+<<<<<<< HEAD
 
         public int StudentID { get; set; }
         public string StudentName { get; set; }
@@ -433,6 +451,12 @@ namespace LinqFramework.Test
             StudentName = studentName;
             Age = age;
         }
+=======
+        
+        public int StudentID { get; set; }
+        public string StudentName { get; set; }
+        public int Age { get; set; }
+>>>>>>> c0137ef503372a374be3ada7684eb76bca9e90dd
 
         public Student(int studentID, string studentName)
         {
@@ -443,6 +467,7 @@ namespace LinqFramework.Test
         public Student()
         {
         }
+<<<<<<< HEAD
 
         public override bool Equals(object obj)
         {
@@ -455,5 +480,7 @@ namespace LinqFramework.Test
         {
             return HashCode.Combine(StudentID, StudentName);
         }
+=======
+>>>>>>> c0137ef503372a374be3ada7684eb76bca9e90dd
     }
 }
