@@ -1,3 +1,5 @@
+using LinqFramework;
+
 namespace LinqFramework.Test
 {
     [TestClass]
@@ -276,7 +278,7 @@ namespace LinqFramework.Test
             };
 
             // Act
-            var sortedList = studentList.OrderByDescending(s => s.StudentName).ThenBy(s => s.Age);
+            var sortedList = studentList.OrderByDescending(s => s.StudentName).ThenByDescending(s => s.Age);
 
             // Assert
             Assert.AreEqual("Bob", sortedList[0].StudentName);
@@ -415,6 +417,197 @@ namespace LinqFramework.Test
 
             // Assert
             CollectionAssert.AreEquivalent(expected, distinctStudents);
+        }
+    }
+
+    [TestClass]
+    public class AggregateTest
+    {
+        private List<Student> data = new List<Student>
+        {
+            new Student { StudentName = "John", Age = 25 },
+            new Student { StudentName = "Jane", Age = 22 },
+            new Student { StudentName = "Jack", Age = 30 },
+            new Student { StudentName = "Jill", Age = 27 },
+        };
+
+        [TestMethod]
+        public void TestSum()
+        {
+            //Act 
+            var result = data.Sum(s => s.Age);
+            //Assert
+            Assert.AreEqual(104, result);
+        }
+
+        [TestMethod]
+        public void TestSumWithSelector()
+        {
+            //Act 
+            var result = data.Sum(s => s.Age * 2);
+            //Assert
+            Assert.AreEqual(208, result);
+        }
+
+        [TestMethod]
+        public void TestMax()
+        {
+            //Act 
+            var result = data.Max(s => s.Age);
+            //Assert
+            Assert.AreEqual(30, result);
+        }
+        
+        [TestMethod]
+        public void TestMin()
+        {
+            //Act 
+            var result = data.Min(s => s.Age);
+            //Assert
+            Assert.AreEqual(22, result);
+        }
+
+        [TestMethod]
+        public void TestAverage()
+        {
+            //Act
+            var result = data.Average(s => s.Age);
+            //Assert
+            Assert.AreEqual(26.0, result);
+        }
+
+        [TestMethod]
+        public void TestAllTrueCondition()
+        {
+            var result = data.All(s => s.Age > 20);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestAllFalseCondition()
+        {
+            var result = data.All(s => s.Age > 25);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void TestAnyTrueCondition()
+        {
+            var result = data.Any(s => s.Age > 20);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestAny_FalseCondition()
+        {
+            var result = data.Any(s => s.Age > 30);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void TestContainsExistingItem()
+        {
+            var result = data.contains(data[0]);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestContainsNonExistingItem()
+        {
+            var student = new Student { StudentName = "Nonexistent", Age = 99 };
+            var result = data.contains(student);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void TestElementAtValidIndex()
+        {
+            var result = data.ElementAt(2);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Jack", result.StudentName);
+            Assert.AreEqual(30, result.Age);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestElementAtInvalidIndex()
+        {
+            var result = data.ElementAt(10); // This should throw an exception
+        }
+
+        [TestMethod]
+        public void TestElementAtOrDefaultValidIndex()
+        {
+            var result = data.ElementAtOrDefault(1);
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Jane", result.StudentName);
+        }
+
+        [TestMethod]
+        public void TestElementAtOrDefault_InvalidIndex()
+        {
+            var result = data.ElementAtOrDefault(10);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void TestFirstOrDefaultWithMatchReturnsFirstMatch()
+        {
+            var result = data.FirstOrDefault(p => p.Age > 24);
+            Assert.IsNotNull(result);
+            Assert.AreEqual("John", result.StudentName);
+        }
+
+        [TestMethod]
+        public void TestFirstOrDefaultWithNoMatchReturnsDefault()
+        {
+            var result = data.FirstOrDefault(p => p.Age > 40);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void TestLastOrDefaultWithMatchReturnsLastMatch()
+        {
+            var result = data.LastOrDefault(p => p.Age > 24);
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Jill", result.StudentName);
+        }
+
+        [TestMethod]
+        public void TestLastOrDefaultWithNoMatchReturnsDefault()
+        {
+            var result = data.LastOrDefault(p => p.Age > 40);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void TestLastWithPredicateReturnsLastMatch()
+        {
+            var result = data.Last(p => p.Age > 24);
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Jill", result.StudentName);
+        }
+
+        [TestMethod]
+        public void TestLastWithNoPredicateReturnsLastItem()
+        {
+            var result = data.Last();
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Jill", result.StudentName);
+        }
+
+        [TestMethod]
+        public void TestLastWithNoMatchReturnsDefault()
+        {
+            var result = data.Last(p => p.Age > 40);
+            Assert.IsNull(result);
         }
     }
 

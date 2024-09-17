@@ -184,5 +184,141 @@
 
             return distinctList;
         }
+
+        public static int Sum<T>(this List<T> list, Func<T, int> selector)
+        {
+            int sum = 0;
+            foreach (var item in list)
+            {
+                sum += selector(item);
+            }
+            return sum;
+        }
+
+        public static int Min<T>(this List<T> list, Func<T, int> selector)
+        {
+            int min = int.MaxValue;
+            foreach (var item in list)
+            {
+                int value = selector(item);
+                if (value < min)
+                {
+                    min = value;
+                }
+            }
+            return min;
+        }
+
+        public static int Max<T>(this List<T> list, Func<T, int> selector)
+        {
+            int max = int.MinValue;
+            foreach (var item in list)
+            {
+                int value = selector(item);
+                if (value > max)
+                {
+                    max = value;
+                }
+            }
+            return max;
+        }
+
+        public static double Average<T>(this List<T> list, Func<T, int> selector)
+        {
+            return (double)list.Sum(selector) / list.Count;
+        }
+
+        public static bool All<T>(this List<T> list, Func<T, bool> predicate)
+        {
+            foreach (var item in list)
+            {
+                if (!predicate(item))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool Any<T>(this List<T> list, Func<T, bool> predicate)
+        {
+            foreach (var item in list)
+            {
+                if (predicate(item))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool contains<T>(this List<T> list, T item)
+        {
+            foreach (var element in list)
+            {
+                if (EqualityComparer<T>.Default.Equals(element, item))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static T ElementAt<T>(this List<T> list, int index)
+        {
+            if (index < 0 || index >= list.Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+            return list[index];
+        }
+
+        public static T ElementAtOrDefault<T>(this List<T> list, int index)
+        {
+            if (index < 0 || index >= list.Count)
+            {
+                return default;
+            }
+            return list[index];
+        }
+
+        public static T FirstOrDefault<T>(this List<T> list, Func<T, bool> predicate)
+        {
+            foreach (var item in list)
+            {
+                if (predicate(item))
+                {
+                    return item;
+                }
+            }
+            return default;
+        }
+
+        public static T LastOrDefault<T>(this List<T> list, Func<T, bool> predicate)
+        {
+            T lastMatch = default;
+            foreach (var item in list)
+            {
+                if (predicate(item))
+                {
+                    lastMatch = item;
+                }
+            }
+            return lastMatch;
+        }
+
+        public static T Last<T>(this List<T> list, Func<T, bool> predicate = null)
+        {
+            T lastMatch = default;
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if (predicate == null || predicate(list[i]))
+                {
+                    return list[i];
+                }
+            }
+            return lastMatch;
+        }
+
     }
 }

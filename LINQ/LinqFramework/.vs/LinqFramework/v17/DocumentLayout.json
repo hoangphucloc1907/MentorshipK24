@@ -6,7 +6,7 @@
       "AbsoluteMoniker": "D:0:0:{5EB004C3-A341-44F6-BEF0-1ADD7D6E528F}|..\\LinqFramework.Test\\LinqFramework.Test.csproj|c:\\loc\\mentorshipk24\\linq\\linqframework.test\\linqtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44BEDB1C-207A-4C37-B255-B0F933D1B17A}|LinqFramework.csproj|c:\\loc\\mentorshipk24\\linq\\linqframework\\linq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{44BEDB1C-207A-4C37-B255-B0F933D1B17A}|LinqFramework.csproj|C:\\Loc\\MentorshipK24\\LINQ\\LinqFramework\\linq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{44BEDB1C-207A-4C37-B255-B0F933D1B17A}|LinqFramework.csproj|solutionrelative:linq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -27,7 +27,7 @@
               "RelativeDocumentMoniker": "..\\LinqFramework.Test\\LinqTest.cs",
               "ToolTip": "C:\\Loc\\MentorshipK24\\LINQ\\LinqFramework.Test\\LinqTest.cs",
               "RelativeToolTip": "..\\LinqFramework.Test\\LinqTest.cs",
-              "ViewState": "AQIAALwBAAAAAAAAAAAAABEAAAAjAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAMQAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-16T14:10:25.184Z",
               "EditorCaption": ""
@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "Linq.cs",
               "ToolTip": "C:\\Loc\\MentorshipK24\\LINQ\\LinqFramework\\Linq.cs",
               "RelativeToolTip": "Linq.cs",
-              "ViewState": "AQIAAKkAAAAAAAAAAAAcwJYAAAA8AAAA",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAQwGgAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-16T14:09:24.114Z",
               "EditorCaption": ""
