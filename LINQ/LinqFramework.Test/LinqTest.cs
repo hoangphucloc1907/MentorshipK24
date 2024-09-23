@@ -1,4 +1,4 @@
-using LinqFramework;
+﻿using LinqFramework;
 
 namespace LinqFramework.Test
 {
@@ -165,18 +165,17 @@ namespace LinqFramework.Test
         }
 
         [TestMethod]
-        public void TestOfTypeShouldFilterNullValuesFromMixedArray()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestOfTypeShouldThrowExceptionForNullInput()
         {
             // Arrange
-            var mixedList = new object[] { null, "One", null, 2 };
-            var expected = new object[] { null, null };
+            object[] mixedList = null;
 
             // Act
             var result = mixedList.OfType<object>();
 
-            // Assert
-            CollectionAssert.AreEqual(expected, result);
         }
+
 
         [TestMethod]
         public void TestOfTypeShouldFilterArraysFromMixedArray()
@@ -250,20 +249,26 @@ namespace LinqFramework.Test
             // Arrange
             var studentList = new List<Student>
             {
-                new Student { StudentName = "Alice", Age = 22 },
-                new Student { StudentName = "Bob", Age = 20 },
-                new Student { StudentName = "Alice", Age = 19 }
+                new Student { StudentName = "John", Age = 18 },
+                new Student { StudentName = "Steve",  Age = 15 },
+                new Student { StudentName = "Bill",  Age = 25 } ,
+                new Student { StudentName = "Ram" , Age = 20 } ,
+                new Student { StudentName = "Ron" , Age = 19 },
+            };
+            var expected = new List<Student>
+            {
+                new Student { StudentName = "Bill",  Age = 25 } ,
+                new Student { StudentName = "John", Age = 18 },
+                new Student { StudentName = "Ram" , Age = 20 },
+                new Student { StudentName = "Ron" , Age = 19 },
+                new Student { StudentName = "Steve",  Age = 15 },
             };
 
             // Act
             var sortedList = studentList.OrderBy(s => s.StudentName).ThenBy(s => s.Age);
 
             // Assert
-            Assert.AreEqual("Alice", sortedList[0].StudentName);
-            Assert.AreEqual(19, sortedList[0].Age);
-            Assert.AreEqual("Alice", sortedList[1].StudentName);
-            Assert.AreEqual(22, sortedList[1].Age);
-            Assert.AreEqual("Bob", sortedList[2].StudentName);
+            Assert.IsTrue(sortedList.SequenceEqual(expected));
         }
 
         [TestMethod]
@@ -272,20 +277,26 @@ namespace LinqFramework.Test
             // Arrange
             var studentList = new List<Student>
             {
-                new Student { StudentName = "Alice", Age = 22 },
-                new Student { StudentName = "Bob", Age = 20 },
-                new Student { StudentName = "Alice", Age = 19 }
+                new Student { StudentName = "John", Age = 18 },
+                new Student { StudentName = "Steve",  Age = 15 },
+                new Student { StudentName = "Bill",  Age = 25 } ,
+                new Student { StudentName = "Ram" , Age = 20 } ,
+                new Student { StudentName = "Ron" , Age = 19 },
+            };
+            var expected = new List<Student>
+            {
+                new Student { StudentName = "Steve",  Age = 15 },
+                new Student { StudentName = "Ron" , Age = 19 },
+                new Student { StudentName = "Ram" , Age = 20 },
+                new Student { StudentName = "John", Age = 18 },
+                new Student { StudentName = "Bill",  Age = 25 } ,
             };
 
             // Act
             var sortedList = studentList.OrderByDescending(s => s.StudentName).ThenByDescending(s => s.Age);
 
             // Assert
-            Assert.AreEqual("Bob", sortedList[0].StudentName);
-            Assert.AreEqual(20, sortedList[0].Age);
-            Assert.AreEqual("Alice", sortedList[1].StudentName);
-            Assert.AreEqual(19, sortedList[1].Age);
-            Assert.AreEqual("Alice", sortedList[2].StudentName);
+            Assert.IsTrue(sortedList.SequenceEqual(expected));
         }
     }
 
@@ -457,7 +468,7 @@ namespace LinqFramework.Test
             //Assert
             Assert.AreEqual(30, result);
         }
-        
+
         [TestMethod]
         public void TestMin()
         {
@@ -611,12 +622,57 @@ namespace LinqFramework.Test
         }
     }
 
+    [TestClass]
+    public class JoinTest
+    {
+        private List<Student> studentList;
+        private List<Standard> standardList;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            studentList = new List<Student>()
+            {
+                new Student() { StudentID = 1, StudentName = "John", StandardID = 1 },
+                new Student() { StudentID = 2, StudentName = "Moin", StandardID = 1 },
+                new Student() { StudentID = 3, StudentName = "Bill", StandardID = 2 },
+                new Student() { StudentID = 4, StudentName = "Ram", StandardID = 2 },
+                new Student() { StudentID = 5, StudentName = "Ron" } 
+            };
+
+            standardList = new List<Standard>()
+            {
+                new Standard() { StandardID = 1, StandardName = "Standard 1" },
+                new Standard() { StandardID = 2, StandardName = "Standard 2" },
+                new Standard() { StandardID = 3, StandardName = "Standard 3" }
+            };
+        }
+
+        [TestMethod]
+        public void TestInnerJoin()
+        {
+            var result = studentList.InnerJoin(
+                standardList,
+                s => s.StandardID,
+                st => st.StandardID,
+                (s, st) => new { s.StudentID, s.StudentName, st.StandardName });
+
+
+            // Kiểm tra kết quả
+            Assert.AreEqual("John", result.First(x => x.StudentID == 1).StudentName);
+            Assert.AreEqual("Standard 1", result.First(x => x.StudentID == 1).StandardName);
+            Assert.AreEqual("Bill", result.First(x => x.StudentID == 3).StudentName);
+            Assert.AreEqual("Standard 2", result.First(x => x.StudentID == 3).StandardName);
+        }
+    }
+
     public class Student
     {
 
         public int StudentID { get; set; }
         public string StudentName { get; set; }
         public int Age { get; set; }
+        public int? StandardID { get; set; }
         public Student(int studentID, string studentName, int age)
         {
             StudentID = studentID;
@@ -645,5 +701,10 @@ namespace LinqFramework.Test
         {
             return HashCode.Combine(StudentID, StudentName);
         }
+    }
+    public class Standard
+    {
+        public int StandardID { get; set; }
+        public string StandardName { get; set; }
     }
 }

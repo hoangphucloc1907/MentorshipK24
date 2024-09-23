@@ -1,4 +1,6 @@
-﻿namespace LinqFramework
+﻿using System.Collections;
+
+namespace LinqFramework
 {
     public static class Linq
     {
@@ -46,125 +48,89 @@
 
         public static T[] OfType<T>(this object[] source)
         {
-            List<T> result = new List<T>();
+            ArgumentNullException.ThrowIfNull(source);
+
+            List<T> result = [];
 
             foreach (var item in source)
             {
-                if (item == null)
+                if (item is T output)
                 {
-                    // Handle null values
-                    if (typeof(T).IsClass || Nullable.GetUnderlyingType(typeof(T)) != null)
-                    {
-                        result.Add(default);
-                    }
-                }
-                else if (typeof(T) == typeof(object))
-                {
-                    // Handle objects (exclude arrays)
-                    if (item.GetType() == typeof(object) && !(item is Array))
-                    {
-                        result.Add((T)item);
-                    }
-                }
-                else if (typeof(T) == typeof(Array))
-                {
-                    // Handle arrays
-                    if (item is Array)
-                    {
-                        result.Add((T)item);
-                    }
-                }
-                else if (item is T)
-                {
-                    // Directly add items that are of the expected type
-                    result.Add((T)item);
+                    result.Add(output);
                 }
             }
-
             return result.ToArray();
         }
 
-        // Helper method to compare values without IComparable
-        private static int CompareValues<T, TKey>(T a, T b, Func<T, TKey> keySelector, bool isDescending = false)
+
+        public static List<T> OrderBy<T, TKey>(this List<T> source, Func<T, TKey> keySelector)
         {
-            var aValue = keySelector(a);
-            var bValue = keySelector(b);
-
-            if (aValue == null && bValue == null) return 0;
-            if (aValue == null) return isDescending ? 1 : -1;
-            if (bValue == null) return isDescending ? -1 : 1;
-
-            var comparison = Comparer<TKey>.Default.Compare(aValue, bValue);
-            return isDescending ? -comparison : comparison;
+            return Sort(source, keySelector, ascending: true);
         }
 
-        public static List<T> OrderBy<T, TKey>(this List<T> list, Func<T, TKey> keySelector)
+        public static List<T> OrderByDescending<T, TKey>(this List<T> source, Func<T, TKey> keySelector)
         {
-            list.Sort((a, b) => CompareValues(a, b, keySelector));
-            return list;
+            return Sort(source, keySelector, ascending: false);
         }
 
-        public static List<T> OrderByDescending<T, TKey>(this List<T> list, Func<T, TKey> keySelector)
+        public static List<T> ThenBy<T, TKey>(this List<T> source, Func<T, TKey> keySelector)
         {
-            list.Sort((a, b) => CompareValues(a, b, keySelector, true));
-            return list;
+            return ThenBy(source, keySelector, ascending: true);
         }
 
-        // something is wrong
-        public static List<T> ThenBy<T, TKey>(this List<T> list, Func<T, TKey> keySelector)
+        public static List<T> ThenByDescending<T, TKey>(this List<T> source, Func<T, TKey> keySelector)
         {
-            list.Sort((a, b) =>
+            return ThenBy(source, keySelector, ascending: false);
+        }
+
+        private static List<T> Sort<T, TKey>(List<T> source, Func<T, TKey> keySelector, bool ascending)
+        {
+            var sortedList = new List<T>(source);
+            sortedList.Sort((x, y) =>
             {
-                int result = CompareValues(a, b, keySelector);
-                return result != 0 ? result : CompareValues(a, b, keySelector);
+                int comparison = Comparer<TKey>.Default.Compare(keySelector(x), keySelector(y));
+                return ascending ? comparison : -comparison;
             });
-            return list;
+            return sortedList;
         }
 
-        // something is wrong
-        public static List<T> ThenByDescending<T, TKey>(this List<T> list, Func<T, TKey> keySelector)
+        private static List<T> ThenBy<T, TKey>(List<T> source, Func<T, TKey> keySelector, bool ascending)
         {
-            list.Sort((a, b) =>
+            var sortedList = new List<T>(source);
+            sortedList.Sort((x, y) =>
             {
-                int result = CompareValues(a, b, keySelector, true);
-                return result != 0 ? result : CompareValues(a, b, keySelector);
+                int primaryComparison = Comparer<TKey>.Default.Compare(keySelector(x), keySelector(y));
+                if (primaryComparison != 0)
+                {
+                    return primaryComparison;
+                }
+
+                return 0;
             });
-            return list;
+
+            return sortedList;
         }
 
 
-        public static Dictionary<TKey, List<T>> GroupBy<T, TKey>(this List<T> source, Func<T, TKey> keySelector)
+        public static Dictionary<TKey, List<TSource>> GroupBy<TSource, TKey>(this List<TSource> source, Func<TSource, TKey> keySelector)
         {
-            var result = new Dictionary<TKey, List<T>>();
+            var result = new Dictionary<TKey, List<TSource>>();
+
             foreach (var item in source)
             {
                 var key = keySelector(item);
                 if (!result.ContainsKey(key))
                 {
-                    result[key] = new List<T>();
+                    result[key] = new List<TSource>();
                 }
                 result[key].Add(item);
             }
             return result;
         }
 
-        public static Dictionary<TKey, List<TElement>> ToLookup<TElement, TKey>(this List<TElement> source, Func<TElement, TKey> keySelector)
+        public static Dictionary<TKey, List<TSource>> ToLookup<TSource, TKey>(this List<TSource> source, Func<TSource, TKey> keySelector)
         {
-            var lookup = new Dictionary<TKey, List<TElement>>();
-
-            foreach (var element in source)
-            {
-                var key = keySelector(element);
-
-                if (!lookup.ContainsKey(key))
-                {
-                    lookup[key] = new List<TElement>();
-                }
-
-                lookup[key].Add(element);
-            }
-
-            return lookup;
+            return GroupBy(source, keySelector);
         }
 
         public static List<T> DistinctBy<T, TKey>(this List<T> source, Func<T, TKey> keySelector)
@@ -318,6 +284,44 @@
                 }
             }
             return lastMatch;
+        }
+
+        public static List<TResult> InnerJoin<TOuter, TInner, TKey, TResult>(
+        this List<TOuter> outer,
+        List<TInner> inner,
+        Func<TOuter, TKey> outerKeySelector,
+        Func<TInner, TKey> innerKeySelector,
+        Func<TOuter, TInner, TResult> resultSelector)
+        {
+            var innerLookup = new Dictionary<TKey, List<TInner>>();
+
+            // Tạo lookup cho danh sách inner
+            foreach (var innerItem in inner)
+            {
+                var key = innerKeySelector(innerItem);
+                if (!innerLookup.ContainsKey(key))
+                {
+                    innerLookup[key] = new List<TInner>();
+                }
+                innerLookup[key].Add(innerItem);
+            }
+
+            var results = new List<TResult>();
+
+            // Duyệt qua danh sách outer và lấy kết quả từ lookup
+            foreach (var outerItem in outer)
+            {
+                var outerKey = outerKeySelector(outerItem);
+                if (innerLookup.TryGetValue(outerKey, out var matchingInners))
+                {
+                    foreach (var innerItem in matchingInners)
+                    {
+                        results.Add(resultSelector(outerItem, innerItem));
+                    }
+                }
+            }
+
+            return results;
         }
 
     }
