@@ -4,8 +4,11 @@ namespace LinqFramework
 {
     public static class Linq
     {
-        public static T[] Where<T>(this T[] source, Func<T, bool> predicate)
+        public static List<T> Where<T>(this List<T> source, Func<T, bool> predicate)
         {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+
             var result = new List<T>();
             foreach (var item in source)
             {
@@ -14,36 +17,44 @@ namespace LinqFramework
                     result.Add(item);
                 }
             }
-            return result.ToArray();
-        }
-
-        public static int Count<T>(this T[] source, Func<T, bool> predicate = null)
-        {
-            var result = predicate != null ? source.Where(predicate).Length : source.Length;
             return result;
         }
 
-        public static T First<T>(this T[] source, Func<T, bool> predicate = null)
+        public static int Count<T>(this List<T> source, Func<T, bool> predicate = null)
         {
+            var result = predicate != null ? source.Where(predicate).Count : source.Count;
+            return result;
+        }
+
+        public static List<T> First<T>(this List<T> source, Func<T, bool> predicate = null)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+
+            var result = new List<T>();
+
             if (predicate != null)
             {
                 foreach (var item in source)
-                {
-                    if (predicate(item)) return item;
-                }
-                return default;
+                    if (predicate(item))
+                    {
+                        result.Add(item);
+                        break; 
+                    }
             }
-            return source.Length > 0 ? source[0] : default;
+            else if (source.Count > 0)
+                result.Add(source[0]);
+
+            return result.Count > 0 ? result : new List<T>();
         }
 
-        public static T[] Select<TSource, T>(this TSource[] source, Func<TSource, T> selector)
+        public static List<T> Select<TSource, T>(this List<TSource> source, Func<TSource, T> selector)
         {
             var result = new List<T>();
             foreach (var item in source)
             {
                 result.Add(selector(item));
             }
-            return result.ToArray();
+            return result;
         }
 
         public static T[] OfType<T>(this object[] source)
@@ -287,40 +298,51 @@ namespace LinqFramework
         }
 
         public static List<TResult> InnerJoin<TOuter, TInner, TKey, TResult>(
-        this List<TOuter> outer,
-        List<TInner> inner,
-        Func<TOuter, TKey> outerKeySelector,
-        Func<TInner, TKey> innerKeySelector,
-        Func<TOuter, TInner, TResult> resultSelector)
+            this List<TOuter> outer,
+            List<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector)
         {
-            var innerLookup = new Dictionary<TKey, List<TInner>>();
-
-            // Tạo lookup cho danh sách inner
-            foreach (var innerItem in inner)
-            {
-                var key = innerKeySelector(innerItem);
-                if (!innerLookup.ContainsKey(key))
-                {
-                    innerLookup[key] = new List<TInner>();
-                }
-                innerLookup[key].Add(innerItem);
-            }
-
+            var innerLookup = inner.ToLookup(innerKeySelector);
             var results = new List<TResult>();
 
-            // Duyệt qua danh sách outer và lấy kết quả từ lookup
             foreach (var outerItem in outer)
             {
                 var outerKey = outerKeySelector(outerItem);
-                if (innerLookup.TryGetValue(outerKey, out var matchingInners))
+                if (innerLookup.TryGetValue(outerKey, out var innerItems))
                 {
-                    foreach (var innerItem in matchingInners)
-                    {
-                        results.Add(resultSelector(outerItem, innerItem));
-                    }
+                    var selectedResults = innerItems.Select(innerItem => resultSelector(outerItem, innerItem));
+                    results.AddRange(selectedResults);
                 }
             }
 
+            return results;
+        }
+
+        public static List<TResult> LeftJoin<TOuter, TInner, TKey, TResult>(
+            this List<TOuter> outer,
+            List<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector)
+        {
+            var innerLookup = inner.ToLookup(innerKeySelector);
+            var results = new List<TResult>();
+
+            foreach (var outerItem in outer)
+            {
+                var outerKey = outerKeySelector(outerItem);
+                if (innerLookup.TryGetValue(outerKey, out var innerItems))
+                {
+                    var selectedResults = innerItems.Select(innerItem => resultSelector(outerItem, innerItem));
+                    results.AddRange(selectedResults);
+                }
+                else
+                {
+                    results.Add(resultSelector(outerItem, default!)); // No matching inner, add default inner
+                }
+            }
             return results;
         }
 

@@ -5,28 +5,7 @@ namespace LinqFramework.Test
     [TestClass]
     public class WhereSelectFirstTest
     {
-        [TestMethod]
-        public void TestWhereShouldReturnItemsThatMeetCondition()
-        {
-            //Arrange
-            var data = new[]
-            {
-                new { Name = "John", Age = 25 },
-                new { Name = "Jane", Age = 22 },
-                new { Name = "Jack", Age = 30 },
-                new { Name = "Jill", Age = 27 },
-            };
-            //Act
-            var result = data.Where(e => e.Age >= 25);
-
-            //Assert
-            Assert.AreEqual(3, result.Length);
-            Assert.AreEqual("John", result[0].Name);
-            Assert.AreEqual("Jack", result[1].Name);
-            Assert.AreEqual("Jill", result[2].Name);
-        }
-
-        private readonly Student[] students = new[]
+        private readonly List<Student> students = new List<Student>
         {
             new Student { StudentID = 1, StudentName = "John", Age = 18 },
             new Student { StudentID = 2, StudentName = "Steve", Age = 21 },
@@ -36,6 +15,20 @@ namespace LinqFramework.Test
             new Student { StudentID = 6, StudentName = "Chris", Age = 17 },
             new Student { StudentID = 7, StudentName = "Rob", Age = 19 }
         };
+
+        [TestMethod]
+        public void TestWhereShouldReturnItemsThatMeetCondition()
+        {
+            //Act
+            var result = students.Where(e => e.Age >= 25);
+
+            //Assert
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("Bill", result[0].StudentName);
+            Assert.AreEqual("Ron", result[1].StudentName);
+        }
+
+        
 
         [TestMethod]
         public void TestWhereShouldFilterItemsBasedOnPredicate()
@@ -63,7 +56,7 @@ namespace LinqFramework.Test
             var result = students.First(std => std.Age > 20);
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.StudentID);
+            Assert.AreEqual(2, result[0].StudentID);
         }
 
         [TestMethod]
@@ -72,7 +65,7 @@ namespace LinqFramework.Test
             //Act
             var result = students.First();
             //Assert
-            Assert.AreEqual(1, result.StudentID);
+            Assert.AreEqual(1, result[0].StudentID);
         }
 
         [TestMethod]
@@ -81,16 +74,13 @@ namespace LinqFramework.Test
             //Act
             var result = students.First(std => std.Age < 10);
             //Assert
-            Assert.AreEqual(default, result);
+            Assert.AreEqual(0, result.Count);
         }
 
         [TestMethod]
         public void TestSelectShouldReturnItemsBasedOnSelector()
         {
-            var result = students.Select(std => new { Id = std.StudentID, Name = std.StudentName });
-
-            Assert.AreEqual(7, result.Count());
-
+            //Arrange
             var expected = new[]
             {
                 new { Id = 1, Name = "John" },
@@ -101,18 +91,26 @@ namespace LinqFramework.Test
                 new { Id = 6, Name = "Chris" },
                 new { Id = 7, Name = "Rob" }
             };
+            //Act
+            var result = students.Select(std => new { Id = std.StudentID, Name = std.StudentName });
+
+            //Assert
+            Assert.AreEqual(7, result.Count());
             Assert.IsTrue(result.SequenceEqual(expected));
         }
 
         [TestMethod]
         public void TestWhereSelectFirstShouldReturnFirstItemMatchingPredicate()
         {
+            //Arrange
+          
+            //Act
             var result = students
                 .Where(std => std.Age > 21)
                 .Select(std => std.StudentID)
                 .First();
-
-            Assert.AreEqual(3, result);
+            //Assert
+            Assert.AreEqual(3, result[0]);
         }
 
     }
@@ -214,9 +212,9 @@ namespace LinqFramework.Test
             var result = sortedStudents.First();
             var expected = new Student { StudentID = 5, StudentName = "Alex", Age = 31 };
 
-            Assert.AreEqual(expected.StudentID, result.StudentID);
-            Assert.AreEqual(expected.StudentName, result.StudentName);
-            Assert.AreEqual(expected.Age, result.Age);
+            Assert.AreEqual(expected.StudentID, result[0].StudentID);
+            Assert.AreEqual(expected.StudentName, result[0].StudentName);
+            Assert.AreEqual(expected.Age, result[0].Age);
         }
 
         [TestMethod]
@@ -238,9 +236,9 @@ namespace LinqFramework.Test
             var result = sortedStudents.First();
             var expected = new Student { StudentID = 4, StudentName = "Ram", Age = 42 };
 
-            Assert.AreEqual(expected.StudentID, result.StudentID);
-            Assert.AreEqual(expected.StudentName, result.StudentName);
-            Assert.AreEqual(expected.Age, result.Age);
+            Assert.AreEqual(expected.StudentID, result[0].StudentID);
+            Assert.AreEqual(expected.StudentName, result[0].StudentName);
+            Assert.AreEqual(expected.Age, result[0].Age);
         }
 
         [TestMethod]
@@ -625,22 +623,22 @@ namespace LinqFramework.Test
     [TestClass]
     public class JoinTest
     {
-        private List<Student> studentList;
-        private List<Standard> standardList;
+        private List<Student> _studentList;
+        private List<Standard> _standardList;
 
         [TestInitialize]
         public void Setup()
         {
-            studentList = new List<Student>()
+            _studentList = new List<Student>()
             {
                 new Student() { StudentID = 1, StudentName = "John", StandardID = 1 },
                 new Student() { StudentID = 2, StudentName = "Moin", StandardID = 1 },
                 new Student() { StudentID = 3, StudentName = "Bill", StandardID = 2 },
                 new Student() { StudentID = 4, StudentName = "Ram", StandardID = 2 },
-                new Student() { StudentID = 5, StudentName = "Ron" } 
+                new Student() { StudentID = 5, StudentName = "Ron" }
             };
 
-            standardList = new List<Standard>()
+            _standardList = new List<Standard>()
             {
                 new Standard() { StandardID = 1, StandardName = "Standard 1" },
                 new Standard() { StandardID = 2, StandardName = "Standard 2" },
@@ -651,18 +649,53 @@ namespace LinqFramework.Test
         [TestMethod]
         public void TestInnerJoin()
         {
-            var result = studentList.InnerJoin(
-                standardList,
-                s => s.StandardID,
-                st => st.StandardID,
-                (s, st) => new { s.StudentID, s.StudentName, st.StandardName });
+            //Act
+            var result = _studentList.InnerJoin(
+            _standardList,
+            student => student.StandardID,
+            standard => standard.StandardID,
+            (student, standard) => new
+            {
+                StudentName = student.StudentName,
+                StandardName = standard.StandardName
+            });
 
 
-            // Kiểm tra kết quả
-            Assert.AreEqual("John", result.First(x => x.StudentID == 1).StudentName);
-            Assert.AreEqual("Standard 1", result.First(x => x.StudentID == 1).StandardName);
-            Assert.AreEqual("Bill", result.First(x => x.StudentID == 3).StudentName);
-            Assert.AreEqual("Standard 2", result.First(x => x.StudentID == 3).StandardName);
+            //Assert
+            Assert.AreEqual("John", result[0].StudentName);
+            Assert.AreEqual("Standard 1", result[0].StandardName);
+            Assert.AreEqual("Moin", result[1].StudentName);
+            Assert.AreEqual("Standard 1", result[1].StandardName);
+            Assert.AreEqual("Bill", result[2].StudentName);
+            Assert.AreEqual("Standard 2", result[2].StandardName);
+            Assert.AreEqual("Ram", result[3].StudentName);
+            Assert.AreEqual("Standard 2", result[3].StandardName);
+        }
+
+        [TestMethod]
+        public void TestLeftJoin()
+        {
+            var result = _studentList.LeftJoin(
+            _standardList,
+            student => student.StandardID,
+            standard => standard.StandardID,
+            (student, standard) => new
+            {
+                StudentName = student.StudentName,
+                StandardName =  standard?.StandardName 
+            });
+
+            //Assert
+            Assert.AreEqual("John", result[0].StudentName);
+            Assert.AreEqual("Standard 1", result[0].StandardName);
+            Assert.AreEqual("Moin", result[1].StudentName);
+            Assert.AreEqual("Standard 1", result[1].StandardName);
+            Assert.AreEqual("Bill", result[2].StudentName);
+            Assert.AreEqual("Standard 2", result[2].StandardName);
+            Assert.AreEqual("Ram", result[3].StudentName);
+            Assert.AreEqual("Standard 2", result[3].StandardName);
+            Assert.AreEqual("Ron", result[4].StudentName);
+            Assert.IsNull(result[4].StandardName);
         }
     }
 
@@ -672,7 +705,7 @@ namespace LinqFramework.Test
         public int StudentID { get; set; }
         public string StudentName { get; set; }
         public int Age { get; set; }
-        public int? StandardID { get; set; }
+        public int StandardID { get; set; }
         public Student(int studentID, string studentName, int age)
         {
             StudentID = studentID;
