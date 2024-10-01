@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using NewsAggregator.Entity;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,62 +8,157 @@ using System.Data.SqlClient;
 
 namespace NewsAggregator.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
-    {
-        // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<User> Get()
-        {
-            var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
-            var connection = new SqlConnection(connectionString);
+	[Route("api/[controller]")]
+	[ApiController]
+	public class UserController : ControllerBase
+	{
+		// GET: api/<UserController>
+		[HttpGet]
+		public IEnumerable<User> Get()
+		{
+			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
+			var result = new List<User>();
 
-            connection.Open();
-            var cmdQuery = "select * from Users";
+			using (var connection = new SqlConnection(connectionString))
+			{
+				connection.Open();
+				var cmdQuery = "SELECT UserID, Email, Username FROM Users";
 
-            var command = new SqlCommand(cmdQuery, connection);
-            var reader = command.ExecuteReader();
-            var result = new List<User>();
+				using (var command = new SqlCommand(cmdQuery, connection))
+				using (var reader = command.ExecuteReader())
+				{
+					while (reader.Read())
+					{
+						result.Add(new User
+						{
+							UserID = reader.GetInt32(0),
+							Email = reader.GetString(1),
+							Username = reader.GetString(2),
+						});
+					}
+				}
+			}
 
-            while (reader.Read())
-            {
-                result.Add(new User
-                {
-                    UserID = reader.GetInt32(0),
-                    Email = reader.GetString(1),
-                    Username = reader.GetString(2),
-               
-                });
-            }
-            connection.Close();
+			return result;
+		}
 
-            return result;
-        }
 
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+		// GET api/<UserController>/5
+		[HttpGet("{id}")]
+		public ActionResult<User> Get(int id)
+		{
+			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
+			User result = null;
 
-        // POST api/<UserController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+			using (var connection = new SqlConnection(connectionString))
+			{
+				connection.Open();
+				var cmdQuery = "SELECT UserID, Email, Username FROM Users WHERE UserID = @UserID";
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+				using (var command = new SqlCommand(cmdQuery, connection))
+				{
+					command.Parameters.AddWithValue("@UserID", id);
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }
+					using (var reader = command.ExecuteReader())
+					{
+						if (reader.Read())
+						{
+							result = new User
+							{
+								UserID = reader.GetInt32(0),
+								Email = reader.GetString(1),
+								Username = reader.GetString(2),
+							};
+						}
+					}
+				}
+			}
+
+			if (result == null)
+			{
+				return NotFound();
+			}
+
+			return Ok(result);
+		}
+
+		// POST api/<UserController>
+		[HttpPost]
+		public IActionResult Post([FromBody] User user)
+		{
+			if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Username))
+			{
+				return BadRequest("Invalid user data.");
+			}
+
+			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
+
+			using (var connection = new SqlConnection(connectionString))
+			{
+				connection.Open();
+				var cmdQuery = "INSERT INTO Users (Email, Username) VALUES (@Email, @Username)";
+
+				using (var command = new SqlCommand(cmdQuery, connection))
+				{
+					command.Parameters.AddWithValue("@Email", user.Email);
+					command.Parameters.AddWithValue("@Username", user.Username);
+					command.ExecuteNonQuery();
+				}
+			}
+
+			return Ok("User inserted successfully.");
+		}
+
+		// PUT api/<UserController>/5
+		[HttpPut("{id}")]
+		public IActionResult Put(int id, [FromBody] User user)
+		{
+			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
+
+			using (var connection = new SqlConnection(connectionString))
+			{
+				connection.Open();
+				var cmdQuery = "UPDATE Users SET Username = @Username WHERE UserID = @UserID";
+
+				using (var command = new SqlCommand(cmdQuery, connection))
+				{
+					command.Parameters.AddWithValue("@Username", user.Username);
+					command.Parameters.AddWithValue("@UserID", id);
+
+					int rowsAffected = command.ExecuteNonQuery();
+					if (rowsAffected == 0)
+					{
+						return NotFound("User not found.");
+					}
+				}
+			}
+
+			return Ok("User updated successfully.");
+		}
+
+		// DELETE api/<UserController>/5
+		[HttpDelete("{id}")]
+		public IActionResult Delete(int id)
+		{
+			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
+
+			using (var connection = new SqlConnection(connectionString))
+			{
+				connection.Open();
+				var cmdQuery = "DELETE FROM Users WHERE UserID = @UserID";
+
+				using (var command = new SqlCommand(cmdQuery, connection))
+				{
+					command.Parameters.AddWithValue("@UserID", id);
+
+					int rowsAffected = command.ExecuteNonQuery();
+					if (rowsAffected == 0)
+					{
+						return NotFound("User not found.");
+					}
+				}
+			}
+			return Ok("User deleted successfully.");
+		}
+	}
 }
