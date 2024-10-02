@@ -9,7 +9,8 @@
       "NewsAggregator/1.0.0": {
         "dependencies": {
           "Swashbuckle.AspNetCore": "6.4.0",
-          "System.Data.SqlClient": "4.8.6"
+          "System.Data.SqlClient": "4.8.6",
+          "System.ServiceModel.Syndication": "8.0.0"
         },
         "runtime": {
           "NewsAggregator.dll": {}
@@ -136,7 +137,15 @@
           "System.Security.Principal.Windows": "4.7.0"
         }
       },
-      "System.Security.Principal.Windows/4.7.0": {}
+      "System.Security.Principal.Windows/4.7.0": {},
+      "System.ServiceModel.Syndication/8.0.0": {
+        "runtime": {
+          "lib/net8.0/System.ServiceModel.Syndication.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      }
     }
   },
   "libraries": {
@@ -249,6 +258,13 @@
       "sha512": "sha512-ojD0PX0XhneCsUbAZVKdb7h/70vyYMDYs85lwEI+LngEONe/17A0cFaRFqZU+sOEidcVswYWikYOQ9PPfjlbtQ==",
       "path": "system.security.principal.windows/4.7.0",
       "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
+    },
+    "System.ServiceModel.Syndication/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CJxIUwpBkMCPmIx46tFVOt0zpRrYurUHLW6tJBcmyj+MyWpKc6MMcS69B7IdlV/bgtgys073wMIHZX9QOQ1OFA==",
+      "path": "system.servicemodel.syndication/8.0.0",
+      "hashPath": "system.servicemodel.syndication.8.0.0.nupkg.sha512"
     }
   }
 }

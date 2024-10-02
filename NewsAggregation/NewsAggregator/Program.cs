@@ -1,4 +1,6 @@
 
+using NewsAggregator.Service;
+
 namespace NewsAggregator
 {
     public class Program
@@ -14,7 +16,14 @@ namespace NewsAggregator
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
+			builder.Services.AddScoped<SourceService>(provider =>
+			{
+				var config = provider.GetRequiredService<IConfiguration>();
+				var connectionString = config.GetConnectionString("DefaultConnection");
+				return new SourceService(connectionString);
+			});
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

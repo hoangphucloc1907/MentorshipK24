@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OThllbbQM3A=",
+  "dgSpecHash": "yNKY5mYuG1o=",
   "success": true,
   "projectFilePath": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\NewsAggregator.csproj",
   "expectedPackageFiles": [
@@ -18,7 +18,8 @@
     "C:\\Users\\loczxph\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
     "C:\\Users\\loczxph\\.nuget\\packages\\system.data.sqlclient\\4.8.6\\system.data.sqlclient.4.8.6.nupkg.sha512",
     "C:\\Users\\loczxph\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
-    "C:\\Users\\loczxph\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+    "C:\\Users\\loczxph\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\loczxph\\.nuget\\packages\\system.servicemodel.syndication\\8.0.0\\system.servicemodel.syndication.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }
