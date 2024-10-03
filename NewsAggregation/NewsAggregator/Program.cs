@@ -16,12 +16,8 @@ namespace NewsAggregator
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-			builder.Services.AddScoped<SourceService>(provider =>
-			{
-				var config = provider.GetRequiredService<IConfiguration>();
-				var connectionString = config.GetConnectionString("DefaultConnection");
-				return new SourceService(connectionString);
-			});
+			builder.Services.AddControllers();
+			
 
 			var app = builder.Build();
 

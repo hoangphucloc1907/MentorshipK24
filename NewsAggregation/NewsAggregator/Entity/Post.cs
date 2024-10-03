@@ -2,16 +2,16 @@
 {
     public class Post
     {
-        public int PostID { get; set; }
-        public int UserID { get; set; }
-        public int SquadID { get; set; }
-        public int SourceID { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public string PostType { get; set; }
-        public int ReadingTime { get; set; }
-        public string RssLink { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-    }
+		public int Id { get; set; }
+		public string Url { get; set; }
+		public string Title { get; set; }
+		public string Description { get; set; }
+
+		// Foreign key relationship with Source
+		public int SourceID { get; set; }
+		public Source Source { get; set; }
+
+		// Navigation property to PostTag
+		public ICollection<PostTag> PostTags { get; set; }
+	}
 }

@@ -2,7 +2,10 @@
 {
     public class SourceCategory
     {
-        public int SourceCategoryID { get; set; }
-        public string Name { get; set; }
-    }
+		public int Id { get; set; }
+		public string CategoryName { get; set; }
+
+		// Navigation property to Sources
+		public ICollection<Source> Sources { get; set; }
+	}
 }

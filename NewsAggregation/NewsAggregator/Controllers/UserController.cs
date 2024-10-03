@@ -22,7 +22,7 @@ namespace NewsAggregator.Controllers
 			using (var connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
-				var cmdQuery = "SELECT UserID, Email, Username FROM Users";
+				var cmdQuery = "SELECT Id, Email, Username FROM Users";
 
 				using (var command = new SqlCommand(cmdQuery, connection))
 				using (var reader = command.ExecuteReader())
@@ -31,7 +31,7 @@ namespace NewsAggregator.Controllers
 					{
 						result.Add(new User
 						{
-							UserID = reader.GetInt32(0),
+							Id = reader.GetInt32(0),
 							Email = reader.GetString(1),
 							Username = reader.GetString(2),
 						});
@@ -53,11 +53,11 @@ namespace NewsAggregator.Controllers
 			using (var connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
-				var cmdQuery = "SELECT UserID, Email, Username FROM Users WHERE UserID = @UserID";
+				var cmdQuery = "SELECT Id, Email, Username FROM Users WHERE Id = @Id";
 
 				using (var command = new SqlCommand(cmdQuery, connection))
 				{
-					command.Parameters.AddWithValue("@UserID", id);
+					command.Parameters.AddWithValue("@Id", id);
 
 					using (var reader = command.ExecuteReader())
 					{
@@ -65,7 +65,7 @@ namespace NewsAggregator.Controllers
 						{
 							result = new User
 							{
-								UserID = reader.GetInt32(0),
+								Id = reader.GetInt32(0),
 								Email = reader.GetString(1),
 								Username = reader.GetString(2),
 							};
@@ -118,12 +118,12 @@ namespace NewsAggregator.Controllers
 			using (var connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
-				var cmdQuery = "UPDATE Users SET Username = @Username WHERE UserID = @UserID";
+				var cmdQuery = "UPDATE Users SET Username = @Username WHERE Id = @Id";
 
 				using (var command = new SqlCommand(cmdQuery, connection))
 				{
 					command.Parameters.AddWithValue("@Username", user.Username);
-					command.Parameters.AddWithValue("@UserID", id);
+					command.Parameters.AddWithValue("@Id", id);
 
 					int rowsAffected = command.ExecuteNonQuery();
 					if (rowsAffected == 0)
@@ -145,11 +145,11 @@ namespace NewsAggregator.Controllers
 			using (var connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
-				var cmdQuery = "DELETE FROM Users WHERE UserID = @UserID";
+				var cmdQuery = "DELETE FROM Users WHERE Id = @Id";
 
 				using (var command = new SqlCommand(cmdQuery, connection))
 				{
-					command.Parameters.AddWithValue("@UserID", id);
+					command.Parameters.AddWithValue("@Id", id);
 
 					int rowsAffected = command.ExecuteNonQuery();
 					if (rowsAffected == 0)

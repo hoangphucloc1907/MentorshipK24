@@ -2,9 +2,10 @@
 {
     public class Tag
     {
-        public int TagID { get; set; }
-        public int CategoryTagID { get; set; }
-        public string TagName { get; set; }
-        public DateTime CreatedAt { get; set; }
-    }
+		public int Id { get; set; }
+		public string Name { get; set; }
+
+		// Navigation property to PostTag
+		public ICollection<PostTag> PostTags { get; set; }
+	}
 }

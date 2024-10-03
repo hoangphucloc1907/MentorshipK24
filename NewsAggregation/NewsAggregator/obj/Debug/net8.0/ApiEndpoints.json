@@ -1,15 +1,15 @@
 [
   {
     "ContainingType": "NewsAggregator.Controllers.SourceController",
-    "Method": "FetchAndInsertRssData",
+    "Method": "FetchRss",
     "RelativePath": "api/Source/fetch-rss",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "rssUrl",
-        "Type": "System.String",
+        "Name": "request",
+        "Type": "NewsAggregator.Dto.RssRequest",
         "IsRequired": true
       }
     ],
