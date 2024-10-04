@@ -2,12 +2,10 @@
 {
 	public class User
 	{
-		public int Id { get; set; }
+		public int Id { get; set; } 
 		public string Username { get; set; }
-		public string Password { get; set; }
 		public string Email { get; set; }
-
-		// Navigation property to UserFollowTag
-		public ICollection<UserFollowTag> UserFollowTags { get; set; }
+		public string Password { get; set; }
+		public string Role { get; set; }
 	}
 }

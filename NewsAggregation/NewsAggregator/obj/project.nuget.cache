@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "yNKY5mYuG1o=",
+  "dgSpecHash": "PIUlDryfDLc=",
   "success": true,
   "projectFilePath": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\NewsAggregator.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\loczxph\\.nuget\\packages\\htmlagilitypack\\1.11.67\\htmlagilitypack.1.11.67.nupkg.sha512",
     "C:\\Users\\loczxph\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\loczxph\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\loczxph\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

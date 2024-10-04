@@ -15,9 +15,15 @@ namespace NewsAggregator
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
 			builder.Services.AddControllers();
-			
+
+			builder.Services.AddHostedService<RssScraperHostedService>(provider =>
+			{
+				var logger = provider.GetRequiredService<ILogger<RssScraperHostedService>>();
+				var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+				return new RssScraperHostedService(logger, connectionString);
+			});
+
 
 			var app = builder.Build();
 

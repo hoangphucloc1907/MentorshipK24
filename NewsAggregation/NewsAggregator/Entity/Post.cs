@@ -2,16 +2,12 @@
 {
     public class Post
     {
-		public int Id { get; set; }
-		public string Url { get; set; }
+		public int Id { get; set; } // Primary Key
+		public int CategoryId { get; set; }
 		public string Title { get; set; }
-		public string Description { get; set; }
-
-		// Foreign key relationship with Source
-		public int SourceID { get; set; }
-		public Source Source { get; set; }
-
-		// Navigation property to PostTag
-		public ICollection<PostTag> PostTags { get; set; }
+		public string Link { get; set; }
+		public string Guid { get; set; }
+		public DateTime Pubdate { get; set; }
+		public byte[] Image { get; set; }
 	}
 }

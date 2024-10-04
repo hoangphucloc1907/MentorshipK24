@@ -1,21 +1,5 @@
 [
   {
-    "ContainingType": "NewsAggregator.Controllers.SourceController",
-    "Method": "FetchRss",
-    "RelativePath": "api/Source/fetch-rss",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "NewsAggregator.Dto.RssRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "NewsAggregator.Controllers.TagController",
     "Method": "Get",
     "RelativePath": "api/Tag",

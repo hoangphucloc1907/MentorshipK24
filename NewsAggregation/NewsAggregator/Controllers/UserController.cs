@@ -10,16 +10,22 @@ namespace NewsAggregator.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class UserController : ControllerBase
+	public class UserController: ControllerBase
 	{
+
+		private readonly string _connectionString;
+
+		public UserController(IConfiguration configuration)
+		{
+			_connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new ArgumentNullException(nameof(configuration), "Connection string cannot be null");
+		}
 		// GET: api/<UserController>
 		[HttpGet]
 		public IEnumerable<User> Get()
 		{
-			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
 			var result = new List<User>();
 
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(_connectionString))
 			{
 				connection.Open();
 				var cmdQuery = "SELECT Id, Email, Username FROM Users";
@@ -42,15 +48,13 @@ namespace NewsAggregator.Controllers
 			return result;
 		}
 
-
 		// GET api/<UserController>/5
 		[HttpGet("{id}")]
 		public ActionResult<User> Get(int id)
 		{
-			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
 			User result = null;
 
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(_connectionString))
 			{
 				connection.Open();
 				var cmdQuery = "SELECT Id, Email, Username FROM Users WHERE Id = @Id";
@@ -91,9 +95,7 @@ namespace NewsAggregator.Controllers
 				return BadRequest("Invalid user data.");
 			}
 
-			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
-
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(_connectionString))
 			{
 				connection.Open();
 				var cmdQuery = "INSERT INTO Users (Email, Username) VALUES (@Email, @Username)";
@@ -113,9 +115,7 @@ namespace NewsAggregator.Controllers
 		[HttpPut("{id}")]
 		public IActionResult Put(int id, [FromBody] User user)
 		{
-			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
-
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(_connectionString))
 			{
 				connection.Open();
 				var cmdQuery = "UPDATE Users SET Username = @Username WHERE Id = @Id";
@@ -140,9 +140,7 @@ namespace NewsAggregator.Controllers
 		[HttpDelete("{id}")]
 		public IActionResult Delete(int id)
 		{
-			var connectionString = "Data Source=DESKTOP-CS11CFJ\\SQLEXPRESS;Initial Catalog=NewsAggregator;Integrated Security=True;";
-
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(_connectionString))
 			{
 				connection.Open();
 				var cmdQuery = "DELETE FROM Users WHERE Id = @Id";
