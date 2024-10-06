@@ -173,12 +173,26 @@ namespace NewsAggregator.Service
 			using (var connection = new SqlConnection(_connectionString))
 			{
 				await connection.OpenAsync();
-				var command = new SqlCommand("INSERT INTO Source (SourceUrl, CategoryId, ProviderId) VALUES (@SourceUrl, @CategoryId, @ProviderId)", connection);
-				command.Parameters.AddWithValue("@SourceUrl", sourceUrl);
-				command.Parameters.AddWithValue("@CategoryId", categoryId);
-				command.Parameters.AddWithValue("@ProviderId", providerId);
 
-				await command.ExecuteNonQueryAsync();
+				// Check if source already exists
+				var selectCommand = new SqlCommand("SELECT Id FROM Source WHERE SourceUrl = @SourceUrl", connection);
+				selectCommand.Parameters.AddWithValue("@SourceUrl", sourceUrl);
+
+				var result = await selectCommand.ExecuteScalarAsync();
+				if (result != null)
+				{
+					_logger.LogInformation($"Source already exists: {sourceUrl}");
+					return;
+				}
+
+				// If not, insert new source
+				var insertCommand = new SqlCommand("INSERT INTO Source (SourceUrl, CategoryId, ProviderId) VALUES (@SourceUrl, @CategoryId, @ProviderId)", connection);
+				insertCommand.Parameters.AddWithValue("@SourceUrl", sourceUrl);
+				insertCommand.Parameters.AddWithValue("@CategoryId", categoryId);
+				insertCommand.Parameters.AddWithValue("@ProviderId", providerId);
+
+				await insertCommand.ExecuteNonQueryAsync();
+				_logger.LogInformation($"Inserted new source: {sourceUrl}");
 			}
 		}
 
@@ -234,7 +248,7 @@ namespace NewsAggregator.Service
 					var image = GetImageFromItem(item);
 					int categoryId = await GetCategoryIdFromSource(url);
 
-					tasks.Add(InsertPost(new Post
+					tasks.Add(UpsertPost(new Post
 					{
 						CategoryId = categoryId,
 						Title = title,
@@ -340,20 +354,45 @@ namespace NewsAggregator.Service
 			return string.Empty; // Return empty string if no image found
 		}
 
-		private async Task InsertPost(Post post)
+		private async Task UpsertPost(Post post)
 		{
 			using (var connection = new SqlConnection(_connectionString))
 			{
 				await connection.OpenAsync();
-				var command = new SqlCommand("INSERT INTO Post (CategoryId, Title, Link, Guid, Pubdate, Image) VALUES (@CategoryId, @Title, @Link, @Guid, @Pubdate, @Image)", connection);
-				command.Parameters.AddWithValue("@CategoryId", post.CategoryId);
-				command.Parameters.AddWithValue("@Title", post.Title);
-				command.Parameters.AddWithValue("@Link", post.Link);
-				command.Parameters.AddWithValue("@Guid", post.Guid);
-				command.Parameters.AddWithValue("@Pubdate", post.Pubdate);
-				command.Parameters.AddWithValue("@Image", post.Image ?? (object)DBNull.Value);
 
-				await command.ExecuteNonQueryAsync();
+				// Check if post already exists
+				var selectCommand = new SqlCommand("SELECT Id FROM Post WHERE Guid = @Guid", connection);
+				selectCommand.Parameters.AddWithValue("@Guid", post.Guid);
+
+				var result = await selectCommand.ExecuteScalarAsync();
+				if (result != null)
+				{
+					// Update the existing post
+					var updateCommand = new SqlCommand("UPDATE Post SET CategoryId = @CategoryId, Title = @Title, Link = @Link, Pubdate = @Pubdate, Image = @Image WHERE Guid = @Guid", connection);
+					updateCommand.Parameters.AddWithValue("@CategoryId", post.CategoryId);
+					updateCommand.Parameters.AddWithValue("@Title", post.Title);
+					updateCommand.Parameters.AddWithValue("@Link", post.Link);
+					updateCommand.Parameters.AddWithValue("@Pubdate", post.Pubdate);
+					updateCommand.Parameters.AddWithValue("@Image", post.Image ?? (object)DBNull.Value);
+					updateCommand.Parameters.AddWithValue("@Guid", post.Guid);
+
+					await updateCommand.ExecuteNonQueryAsync();
+					_logger.LogInformation($"Post updated: {post.Title}");
+				}
+				else
+				{
+					// Insert the new post
+					var insertCommand = new SqlCommand("INSERT INTO Post (CategoryId, Title, Link, Guid, Pubdate, Image) VALUES (@CategoryId, @Title, @Link, @Guid, @Pubdate, @Image)", connection);
+					insertCommand.Parameters.AddWithValue("@CategoryId", post.CategoryId);
+					insertCommand.Parameters.AddWithValue("@Title", post.Title);
+					insertCommand.Parameters.AddWithValue("@Link", post.Link);
+					insertCommand.Parameters.AddWithValue("@Guid", post.Guid);
+					insertCommand.Parameters.AddWithValue("@Pubdate", post.Pubdate);
+					insertCommand.Parameters.AddWithValue("@Image", post.Image ?? (object)DBNull.Value);
+
+					await insertCommand.ExecuteNonQueryAsync();
+					_logger.LogInformation($"New post inserted: {post.Title}");
+				}
 			}
 		}
 	}
