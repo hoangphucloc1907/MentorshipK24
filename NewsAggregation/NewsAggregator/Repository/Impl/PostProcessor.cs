@@ -162,24 +162,23 @@ namespace NewsAggregator.Repository.Impl
             var tags = new List<string>();
             try
             {
-                var httpClient = new HttpClient();
-                var html = await httpClient.GetStringAsync(postLink);
-
-                var doc = new HtmlDocument();
-                doc.LoadHtml(html);
-
-                var htmlStructure = new Dictionary<string, string[]>
+                using (var httpClient = new HttpClient())
                 {
-                    { "tuoitreTags", new[] { "//div[@class='detail-tab']/a" } },
-                    { "vnexpressTags", new[] { "//div[@class='tags']/h4/a" } }
-                };
+                    var html = await httpClient.GetStringAsync(postLink);
 
-                foreach (var entry in htmlStructure)
-                {
-                    var nodes = doc.DocumentNode.SelectNodes(entry.Value[0]);
-                    if (nodes != null)
+                    var doc = new HtmlDocument();
+                    doc.LoadHtml(html);
+
+                    var tuoitreTags = doc.DocumentNode.SelectNodes("//div[@class='detail-tab']/a");
+                    if (tuoitreTags != null)
                     {
-                        tags.AddRange(nodes.Select(tag => tag.InnerText.Trim()));
+                        tags.AddRange(tuoitreTags.Select(tag => tag.InnerText.Trim()));
+                    }
+
+                    var vnexpressTags = doc.DocumentNode.SelectNodes("//div[@class='tags']/h4/a");
+                    if (vnexpressTags != null)
+                    {
+                        tags.AddRange(vnexpressTags.Select(tag => tag.InnerText.Trim()));
                     }
                 }
             }

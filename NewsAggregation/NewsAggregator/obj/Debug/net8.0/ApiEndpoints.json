@@ -118,7 +118,7 @@
   },
   {
     "ContainingType": "NewsAggregator.Controllers.UserController",
-    "Method": "Get",
+    "Method": "GetAllUser",
     "RelativePath": "api/User",
     "HttpMethod": "GET",
     "IsController": true,
@@ -138,7 +138,7 @@
   },
   {
     "ContainingType": "NewsAggregator.Controllers.UserController",
-    "Method": "Post",
+    "Method": "Insert",
     "RelativePath": "api/User",
     "HttpMethod": "POST",
     "IsController": true,
@@ -154,7 +154,7 @@
   },
   {
     "ContainingType": "NewsAggregator.Controllers.UserController",
-    "Method": "Get",
+    "Method": "GetUserById",
     "RelativePath": "api/User/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -180,7 +180,7 @@
   },
   {
     "ContainingType": "NewsAggregator.Controllers.UserController",
-    "Method": "Put",
+    "Method": "Update",
     "RelativePath": "api/User/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -214,5 +214,41 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NewsAggregator.Controllers.UserController",
+    "Method": "GetPostsByUserFollow",
+    "RelativePath": "api/User/posts/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[NewsAggregator.Entity.Post, NewsAggregator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]
