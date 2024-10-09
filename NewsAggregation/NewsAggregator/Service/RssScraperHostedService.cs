@@ -1,15 +1,4 @@
-﻿using HtmlAgilityPack;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Text.RegularExpressions;
-using System.ServiceModel.Syndication;
-using System.Xml;
-using NewsAggregator.Entity;
-using System.Globalization;
+﻿
 using NewsAggregator.Repository;
 
 namespace NewsAggregator.Service

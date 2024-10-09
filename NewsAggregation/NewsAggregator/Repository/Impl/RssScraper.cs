@@ -19,12 +19,12 @@ namespace NewsAggregator.Repository.Impl
             _providerRepository = providerRepository;
             _sourceRepository = sourceRepository;
             _providerXPathMappings = new Dictionary<string, string>
-        {
-            { "tuoitre.vn", "//ul[@class='list-rss clearfix']/li/a" },
-            { "vnexpress.net", "//ul[@class='list-rss']/li/a" },
-            { "thanhnien.vn", "//ul[@class='cate-content']/li/a" }
-            // Add more mappings as needed
-        };
+            {
+                { "tuoitre.vn", "//ul[@class='list-rss clearfix']/li/a" },
+                { "vnexpress.net", "//ul[@class='list-rss']/li/a" },
+                { "thanhnien.vn", "//ul[@class='cate-content']/li/a" }
+                // Add more mappings as needed
+            };
         }
 
         public async Task ScrapeAndStoreRssData(string url)

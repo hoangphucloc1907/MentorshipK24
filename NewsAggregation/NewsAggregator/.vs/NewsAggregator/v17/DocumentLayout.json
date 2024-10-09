@@ -3,35 +3,28 @@
   "WorkspaceRootPath": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\repository\\impl\\postprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:repository\\impl\\postprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\repository\\impl\\sourcerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:repository\\impl\\sourcerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\repository\\impl\\postprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:repository\\impl\\postprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\repository\\impl\\rssscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:repository\\impl\\rssscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\service\\rssscraperhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:service\\rssscraperhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DESKTOP_CS11CFJ_SQLEXPRESS/NewsAggregator/True/SqlTable/dbo.Tag.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\repository\\ipostprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:repository\\ipostprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\repository\\irssscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:repository\\irssscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\repository\\impl\\rssscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:repository\\impl\\rssscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|c:\\loc\\mentorshipk24\\newsaggregation\\newsaggregator\\repository\\impl\\providerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15C336A1-FC4C-40FE-A9EB-E502A2F025FE}|NewsAggregator.csproj|solutionrelative:repository\\impl\\providerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,102 +34,82 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProviderRepository.cs",
+              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\Impl\\ProviderRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Impl\\ProviderRepository.cs",
+              "ToolTip": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\Impl\\ProviderRepository.cs",
+              "RelativeToolTip": "Repository\\Impl\\ProviderRepository.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwC4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T13:25:49.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "SourceRepository.cs",
+              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\Impl\\SourceRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Impl\\SourceRepository.cs",
+              "ToolTip": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\Impl\\SourceRepository.cs",
+              "RelativeToolTip": "Repository\\Impl\\SourceRepository.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwBEAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T12:27:16.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAiwLUAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAAALUAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-08T11:02:31.424Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "dbo.Tag [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/DESKTOP_CS11CFJ_SQLEXPRESS/NewsAggregator/True/SqlTable/dbo.Tag.sql",
-              "ToolTip": "dbo.Tag [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-10-08T10:51:29.559Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "RssScraper.cs",
               "DocumentMoniker": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\Impl\\RssScraper.cs",
               "RelativeDocumentMoniker": "Repository\\Impl\\RssScraper.cs",
               "ToolTip": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\Impl\\RssScraper.cs",
               "RelativeToolTip": "Repository\\Impl\\RssScraper.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAYwBoAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T19:29:53.86Z"
+              "WhenOpened": "2024-10-07T19:29:53.86Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IRssScraper.cs",
-              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\IRssScraper.cs",
-              "RelativeDocumentMoniker": "Repository\\IRssScraper.cs",
-              "ToolTip": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\IRssScraper.cs",
-              "RelativeToolTip": "Repository\\IRssScraper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T19:29:48.419Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IPostProcessor.cs",
-              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\IPostProcessor.cs",
-              "RelativeDocumentMoniker": "Repository\\IPostProcessor.cs",
-              "ToolTip": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\IPostProcessor.cs",
-              "RelativeToolTip": "Repository\\IPostProcessor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T19:17:58.459Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "PostProcessor.cs",
               "DocumentMoniker": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\Impl\\PostProcessor.cs",
               "RelativeDocumentMoniker": "Repository\\Impl\\PostProcessor.cs",
               "ToolTip": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Repository\\Impl\\PostProcessor.cs",
               "RelativeToolTip": "Repository\\Impl\\PostProcessor.cs",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAewGMAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAYwH0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-07T19:16:51.837Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T18:09:03.733Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "RssScraperHostedService.cs",
               "DocumentMoniker": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Service\\RssScraperHostedService.cs",
               "RelativeDocumentMoniker": "Service\\RssScraperHostedService.cs",
               "ToolTip": "C:\\Loc\\MentorshipK24\\NewsAggregation\\NewsAggregator\\Service\\RssScraperHostedService.cs",
               "RelativeToolTip": "Service\\RssScraperHostedService.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAgwBsAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-04T11:11:23.908Z",
               "EditorCaption": ""

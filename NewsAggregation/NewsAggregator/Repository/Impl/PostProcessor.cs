@@ -97,46 +97,34 @@ namespace NewsAggregator.Repository.Impl
 			return imageElement?.GetAttribute("type") == "image/jpeg" ? imageElement.GetAttribute("url") : string.Empty;
 		}
 
-		private async Task<int> UpsertPost(Post post)
-		{
-			using (var connection = new SqlConnection(_connectionString))
-			{
-				await connection.OpenAsync();
+        private async Task<int> UpsertPost(Post post)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
 
-				var selectCommand = new SqlCommand("SELECT Id FROM Post WHERE Guid = @Guid", connection);
-				selectCommand.Parameters.AddWithValue("@Guid", post.Guid);
+                var selectCommand = new SqlCommand("SELECT Id FROM Post WHERE Guid = @Guid", connection);
+                selectCommand.Parameters.AddWithValue("@Guid", post.Guid);
 
-				var result = await selectCommand.ExecuteScalarAsync();
-				if (result != null)
-				{
-					var updateCommand = new SqlCommand("UPDATE Post SET CategoryId = @CategoryId, Title = @Title, Link = @Link, Pubdate = @Pubdate, Image = @Image WHERE Guid = @Guid", connection);
-					updateCommand.Parameters.AddWithValue("@CategoryId", post.CategoryId);
-					updateCommand.Parameters.AddWithValue("@Title", post.Title);
-					updateCommand.Parameters.AddWithValue("@Link", post.Link);
-					updateCommand.Parameters.AddWithValue("@Pubdate", post.Pubdate);
-					updateCommand.Parameters.AddWithValue("@Image", post.Image ?? (object)DBNull.Value);
-					updateCommand.Parameters.AddWithValue("@Guid", post.Guid);
+                var result = await selectCommand.ExecuteScalarAsync();
+                if (result != null)
+                {
+                    return (int)result;
+                }
 
-					await updateCommand.ExecuteNonQueryAsync();
-					_logger.LogInformation($"Post updated: {post.Title}");
-					return (int)result;
-				}
-				else
-				{
-					var insertCommand = new SqlCommand("INSERT INTO Post (CategoryId, Title, Link, Guid, Pubdate, Image) OUTPUT INSERTED.Id VALUES (@CategoryId, @Title, @Link, @Guid, @Pubdate, @Image)", connection);
-					insertCommand.Parameters.AddWithValue("@CategoryId", post.CategoryId);
-					insertCommand.Parameters.AddWithValue("@Title", post.Title);
-					insertCommand.Parameters.AddWithValue("@Link", post.Link);
-					insertCommand.Parameters.AddWithValue("@Guid", post.Guid);
-					insertCommand.Parameters.AddWithValue("@Pubdate", post.Pubdate);
-					insertCommand.Parameters.AddWithValue("@Image", post.Image ?? (object)DBNull.Value);
+                var insertCommand = new SqlCommand("INSERT INTO Post (CategoryId, Title, Link, Guid, Pubdate, Image) OUTPUT INSERTED.Id VALUES (@CategoryId, @Title, @Link, @Guid, @Pubdate, @Image)", connection);
+                insertCommand.Parameters.AddWithValue("@CategoryId", post.CategoryId);
+                insertCommand.Parameters.AddWithValue("@Title", post.Title);
+                insertCommand.Parameters.AddWithValue("@Link", post.Link);
+                insertCommand.Parameters.AddWithValue("@Guid", post.Guid);
+                insertCommand.Parameters.AddWithValue("@Pubdate", post.Pubdate);
+                insertCommand.Parameters.AddWithValue("@Image", post.Image ?? (object)DBNull.Value);
 
-					var postId = await insertCommand.ExecuteScalarAsync();
-					_logger.LogInformation($"New post inserted: {post.Title}");
-					return (int)postId;
-				}
-			}
-		}
+                var postId = await insertCommand.ExecuteScalarAsync();
+                _logger.LogInformation($"New post inserted: {post.Title}");
+                return (int)postId;
+            }
+        }
 
 		private async Task ProcessTagsForAllPosts()
 		{
