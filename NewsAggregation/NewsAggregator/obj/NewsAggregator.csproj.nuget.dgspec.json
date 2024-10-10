@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[1.11.67, )"
             },
+            "Polly": {
+              "target": "Package",
+              "version": "[8.4.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"

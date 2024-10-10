@@ -39,3 +39,5 @@ C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\obj\Debug\net8.0\NewsAggrega
 C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\obj\Debug\net8.0\ref\NewsAggregator.dll
 C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\bin\Debug\net8.0\System.ServiceModel.Syndication.dll
 C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\bin\Debug\net8.0\HtmlAgilityPack.dll
+C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\bin\Debug\net8.0\Polly.dll
+C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\bin\Debug\net8.0\Polly.Core.dll

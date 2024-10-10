@@ -9,5 +9,7 @@
 		public string Guid { get; set; }
 		public DateTimeOffset Pubdate { get; set; }
 		public String Image { get; set; }
-	}
+        public int ViewCount { get; set; }
+		public int Upvote { get; set; }
+    }
 }

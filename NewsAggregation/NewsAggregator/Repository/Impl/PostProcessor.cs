@@ -178,32 +178,50 @@ namespace NewsAggregator.Repository.Impl
             return tags;
         }
 
-		private async Task InsertTagAsync(int postId, List<string> tags)
-		{
-			using (var connection = new SqlConnection(_connectionString))
-			{
-				await connection.OpenAsync();
+        private async Task InsertTagAsync(int postId, List<string> tags)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
 
-				foreach (var tag in tags)
-				{
-					var selectTagCommand = new SqlCommand("SELECT Id FROM Tag WHERE TagName = @TagName", connection);
-					selectTagCommand.Parameters.AddWithValue("@TagName", tag);
+                // Fetch existing tags for the post
+                var existingTags = new HashSet<string>();
+                var selectExistingTagsCommand = new SqlCommand("SELECT t.TagName FROM Tag t INNER JOIN PostTag pt ON t.Id = pt.TagId WHERE pt.PostId = @PostId", connection);
+                selectExistingTagsCommand.Parameters.AddWithValue("@PostId", postId);
 
-					var tagId = await selectTagCommand.ExecuteScalarAsync();
+                using (var reader = await selectExistingTagsCommand.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        existingTags.Add(reader.GetString(0));
+                    }
+                }
 
-					if (tagId == null)
-					{
-						var insertTagCommand = new SqlCommand("INSERT INTO Tag (TagName) OUTPUT INSERTED.Id VALUES (@TagName)", connection);
-						insertTagCommand.Parameters.AddWithValue("@TagName", tag);
-						tagId = await insertTagCommand.ExecuteScalarAsync();
-					}
+                foreach (var tag in tags)
+                {
+                    if (existingTags.Contains(tag))
+                    {
+                        continue; // Skip if the tag already exists for the post
+                    }
 
-					var insertPostTagCommand = new SqlCommand("INSERT INTO PostTag (PostId, TagId) VALUES (@PostId, @TagId)", connection);
-					insertPostTagCommand.Parameters.AddWithValue("@PostId", postId);
-					insertPostTagCommand.Parameters.AddWithValue("@TagId", tagId);
-					await insertPostTagCommand.ExecuteNonQueryAsync();
-				}
-			}
-		}
-	}
+                    var selectTagCommand = new SqlCommand("SELECT Id FROM Tag WHERE TagName = @TagName", connection);
+                    selectTagCommand.Parameters.AddWithValue("@TagName", tag);
+
+                    var tagId = await selectTagCommand.ExecuteScalarAsync();
+
+                    if (tagId == null)
+                    {
+                        var insertTagCommand = new SqlCommand("INSERT INTO Tag (TagName) OUTPUT INSERTED.Id VALUES (@TagName)", connection);
+                        insertTagCommand.Parameters.AddWithValue("@TagName", tag);
+                        tagId = await insertTagCommand.ExecuteScalarAsync();
+                    }
+
+                    var insertPostTagCommand = new SqlCommand("INSERT INTO PostTag (PostId, TagId) SELECT @PostId, @TagId WHERE NOT EXISTS (SELECT 1 FROM PostTag WHERE PostId = @PostId AND TagId = @TagId)", connection);
+                    insertPostTagCommand.Parameters.AddWithValue("@PostId", postId);
+                    insertPostTagCommand.Parameters.AddWithValue("@TagId", tagId);
+                    await insertPostTagCommand.ExecuteNonQueryAsync();
+                }
+            }
+        }
+    }
 }
