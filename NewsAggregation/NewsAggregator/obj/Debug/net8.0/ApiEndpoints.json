@@ -40,6 +40,22 @@
     ]
   },
   {
+    "ContainingType": "NewsAggregator.Controllers.SearchController",
+    "Method": "Search",
+    "RelativePath": "api/Search/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NewsAggregator.Controllers.TagController",
     "Method": "GetTags",
     "RelativePath": "api/Tag",

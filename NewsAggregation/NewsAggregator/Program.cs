@@ -31,7 +31,7 @@ namespace NewsAggregator
 			builder.Services.AddSingleton<ISourceRepository>(provider => new SourceRepository(connectionString, provider.GetRequiredService<ILogger<SourceRepository>>()));
 			builder.Services.AddSingleton<IRssScraper, RssScraper>();
 			builder.Services.AddSingleton<IPostProcessor>(provider => new PostProcessor(connectionString, provider.GetRequiredService<ILogger<PostProcessor>>(), provider.GetRequiredService<ISourceRepository>(), provider.GetRequiredService<ICategoryRepository>()));
-
+			builder.Services.AddScoped<SearchService>();
 
 			builder.Services.AddHostedService<RssScraperHostedService>(provider =>
 			{

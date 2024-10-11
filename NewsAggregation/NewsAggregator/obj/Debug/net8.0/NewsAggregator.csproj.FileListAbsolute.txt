@@ -41,3 +41,4 @@ C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\bin\Debug\net8.0\System.Serv
 C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\bin\Debug\net8.0\HtmlAgilityPack.dll
 C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\bin\Debug\net8.0\Polly.dll
 C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\bin\Debug\net8.0\Polly.Core.dll
+C:\Loc\MentorshipK24\NewsAggregation\NewsAggregator\bin\Debug\net8.0\FuzzySharp.dll
