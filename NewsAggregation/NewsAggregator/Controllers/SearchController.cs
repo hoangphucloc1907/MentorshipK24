@@ -22,11 +22,13 @@ namespace NewsAggregator.Controllers
         [HttpGet("search")]
         public async Task<ActionResult> Search(string searchTerm)
         {
-            var posts = await GetPosts(searchTerm);
-            var tags = await GetTags(searchTerm);
+            var postsTask = GetPosts(searchTerm);
+            var tagsTask = GetTags(searchTerm);
 
-            var matchedPosts = _searchService.SearchPostsByTitle(searchTerm, posts);
-            var matchedTags = _searchService.SearchTagsByName(searchTerm, tags);
+            await Task.WhenAll(postsTask, tagsTask);
+
+            var matchedPosts = _searchService.SearchPostsByTitle(searchTerm, postsTask.Result);
+            var matchedTags = _searchService.SearchTagsByName(searchTerm, tagsTask.Result);
 
             var response = new
             {
@@ -49,26 +51,29 @@ namespace NewsAggregator.Controllers
 
         private async Task<List<Post>> GetPosts(string searchTerm)
         {
+            var posts = new List<Post>();
+
             await using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                var command = new SqlCommand("SELECT Id, Title FROM Post WHERE Title LIKE @searchTerm", connection);
+                var command = new SqlCommand("SELECT TOP 100 Id, Title, ViewCount, Upvote FROM Post WHERE Title LIKE @searchTerm", connection);
                 command.Parameters.AddWithValue("@searchTerm", $"%{searchTerm}%");
 
                 await using var reader = await command.ExecuteReaderAsync();
-                var posts = new List<Post>(reader.FieldCount);
 
                 while (await reader.ReadAsync())
                 {
                     posts.Add(new Post
                     {
                         Id = reader.GetInt32(0),
-                        Title = reader.GetString(1)
+                        Title = reader.IsDBNull(1) ? string.Empty : reader.GetString(1),
+                        ViewCount = reader.IsDBNull(2) ? 0 : reader.GetInt32(2),
+                        Upvote = reader.IsDBNull(3) ? 0 : reader.GetInt32(3)
                     });
                 }
-
-                return posts;
             }
+
+            return posts;
         }
 
         private async Task<List<Tag>> GetTags(string searchTerm)
@@ -78,7 +83,7 @@ namespace NewsAggregator.Controllers
             await using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                var command = new SqlCommand("SELECT Id, TagName FROM Tag WHERE TagName LIKE @searchTerm", connection);
+                var command = new SqlCommand("SELECT TOP 100 Id, TagName FROM Tag WHERE TagName LIKE @searchTerm", connection);
                 command.Parameters.AddWithValue("@searchTerm", $"%{searchTerm}%");
 
                 await using var reader = await command.ExecuteReaderAsync();
@@ -88,7 +93,7 @@ namespace NewsAggregator.Controllers
                     tags.Add(new Tag
                     {
                         Id = reader.GetInt32(0),
-                        TagName = reader.GetString(1)
+                        TagName = reader.IsDBNull(1) ? string.Empty : reader.GetString(1)
                     });
                 }
             }

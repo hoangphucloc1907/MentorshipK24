@@ -33,7 +33,7 @@ namespace NewsAggregator.Service
 
 					await ProcessSourceUrls();
 
-					await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken); // schedule
+					await Task.Delay(TimeSpan.FromHours(1), stoppingToken); // schedule
 				}
 				catch (Exception ex)
 				{
