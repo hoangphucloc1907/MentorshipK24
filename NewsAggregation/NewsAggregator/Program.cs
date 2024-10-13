@@ -30,14 +30,14 @@ namespace NewsAggregator
 			builder.Services.AddSingleton<IProviderRepository>(provider => new ProviderRepository(connectionString, provider.GetRequiredService<ILogger<ProviderRepository>>()));
 			builder.Services.AddSingleton<ISourceRepository>(provider => new SourceRepository(connectionString, provider.GetRequiredService<ILogger<SourceRepository>>()));
 			builder.Services.AddSingleton<IRssScraper, RssScraper>();
-			builder.Services.AddSingleton<IPostProcessor>(provider => new PostProcessor(connectionString, provider.GetRequiredService<ILogger<PostProcessor>>(), provider.GetRequiredService<ISourceRepository>(), provider.GetRequiredService<ICategoryRepository>()));
+			builder.Services.AddSingleton<IPostRepository>(provider => new PostRepository(connectionString, provider.GetRequiredService<ILogger<PostRepository>>(), provider.GetRequiredService<ISourceRepository>(), provider.GetRequiredService<ICategoryRepository>()));
 			builder.Services.AddScoped<SearchService>();
 
 			builder.Services.AddHostedService<RssScraperHostedService>(provider =>
 			{
 				var logger = provider.GetRequiredService<ILogger<RssScraperHostedService>>();
 				var rssScraper = provider.GetRequiredService<IRssScraper>();
-				var postProcessor = provider.GetRequiredService<IPostProcessor>();
+				var postProcessor = provider.GetRequiredService<IPostRepository>();
 				var sourceRepository = provider.GetRequiredService<ISourceRepository>();
 				return new RssScraperHostedService(logger, rssScraper, postProcessor, sourceRepository);
 			});

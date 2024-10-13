@@ -46,11 +46,11 @@ namespace NewsAggregator.Service
                 await connection.OpenAsync();
 
                 var command = new SqlCommand(@"
-                        SELECT T.Id, T.TagName, COUNT(UFT.UserId) AS FollowerCount
-                        FROM Tag T
-                        JOIN UserFollowTag UFT ON T.Id = UFT.TagId
-                        GROUP BY T.Id, T.TagName
-                        ORDER BY FollowerCount DESC", connection);
+                                SELECT T.Id, T.TagName, COUNT(UFT.UserId) AS FollowerCount
+                                FROM Tag T
+                                JOIN UserFollowTag UFT ON T.Id = UFT.TagId
+                                GROUP BY T.Id, T.TagName
+                                ORDER BY FollowerCount DESC", connection);
 
                 using (var reader = await command.ExecuteReaderAsync())
                 {
@@ -77,12 +77,12 @@ namespace NewsAggregator.Service
                 await connection.OpenAsync();
 
                 var command = new SqlCommand(@"
-                        SELECT T.Id, T.TagName, COUNT(UFT.UserId) AS FollowerCount
-                        FROM Tag T
-                        JOIN UserFollowTag UFT ON T.Id = UFT.TagId
-                        WHERE UFT.FollowDate >= DATEADD(day, -7, GETDATE())
-                        GROUP BY T.Id, T.TagName
-                        ORDER BY FollowerCount DESC", connection);
+                                SELECT T.Id, T.TagName, COUNT(UFT.UserId) AS FollowerCount
+                                FROM Tag T
+                                JOIN UserFollowTag UFT ON T.Id = UFT.TagId
+                                WHERE UFT.FollowDate >= DATEADD(day, -7, GETDATE())
+                                GROUP BY T.Id, T.TagName
+                                ORDER BY FollowerCount DESC", connection);
 
                 using (var reader = await command.ExecuteReaderAsync())
                 {
@@ -98,6 +98,40 @@ namespace NewsAggregator.Service
             }
 
             return tags;
+        }
+
+        public async Task FollowTagAsync(int userId, int tagId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                var command = new SqlCommand(@"
+                                INSERT INTO UserFollowTag (UserId, TagId, FollowDate)
+                                VALUES (@UserId, @TagId, GETDATE())", connection);
+
+                command.Parameters.AddWithValue("@UserId", userId);
+                command.Parameters.AddWithValue("@TagId", tagId);
+
+                await command.ExecuteNonQueryAsync();
+            }
+        }
+
+        public async Task UnfollowTagAsync(int userId, int tagId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                var command = new SqlCommand(@"
+                                DELETE FROM UserFollowTag
+                                WHERE UserId = @UserId AND TagId = @TagId", connection);
+
+                command.Parameters.AddWithValue("@UserId", userId);
+                command.Parameters.AddWithValue("@TagId", tagId);
+
+                await command.ExecuteNonQueryAsync();
+            }
         }
     }
 }

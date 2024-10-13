@@ -7,10 +7,10 @@ namespace NewsAggregator.Service
 	{
 		private readonly ILogger<RssScraperHostedService> _logger;
 		private readonly IRssScraper _rssScraper;
-		private readonly IPostProcessor _postProcessor;
+		private readonly IPostRepository _postProcessor;
 		private readonly ISourceRepository _sourceRepository;
 
-		public RssScraperHostedService(ILogger<RssScraperHostedService> logger, IRssScraper rssScraper, IPostProcessor postProcessor, ISourceRepository sourceRepository)
+		public RssScraperHostedService(ILogger<RssScraperHostedService> logger, IRssScraper rssScraper, IPostRepository postProcessor, ISourceRepository sourceRepository)
 		{
 			_logger = logger;
 			_rssScraper = rssScraper;

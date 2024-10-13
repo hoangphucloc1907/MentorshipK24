@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NewsAggregator.Entity;
 using NewsAggregator.Service;
-using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NewsAggregator.Controllers
 {
@@ -49,12 +50,41 @@ namespace NewsAggregator.Controllers
             var tags = await _tagService.GetTrendingTagsAsync();
             return Ok(tags);
         }
-    }
 
+        [HttpPost("follow")]
+        public async Task<IActionResult> FollowTag([FromBody] FollowTagRequest request)
+        {
+            if (request == null || request.UserId <= 0 || request.TagId <= 0)
+            {
+                return BadRequest("Invalid follow tag data.");
+            }
+
+            await _tagService.FollowTagAsync(request.UserId, request.TagId);
+            return Ok("Tag followed successfully.");
+        }
+
+        [HttpPost("unfollow")]
+        public async Task<IActionResult> UnfollowTag([FromBody] FollowTagRequest request)
+        {
+            if (request == null || request.UserId <= 0 || request.TagId <= 0)
+            {
+                return BadRequest("Invalid unfollow tag data.");
+            }
+
+            await _tagService.UnfollowTagAsync(request.UserId, request.TagId);
+            return Ok("Tag unfollowed successfully.");
+        }
+    }
 
     public class TagGroup
     {
         public char Initial { get; set; }
         public List<Tag> Tags { get; set; }
+    }
+
+    public class FollowTagRequest
+    {
+        public int UserId { get; set; }
+        public int TagId { get; set; }
     }
 }

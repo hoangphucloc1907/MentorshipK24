@@ -6,14 +6,14 @@ using System.Xml;
 
 namespace NewsAggregator.Repository.Impl
 {
-	public class PostProcessor : IPostProcessor
+	public class PostRepository : IPostRepository
 	{
 		private readonly string _connectionString;
-		private readonly ILogger<PostProcessor> _logger;
+		private readonly ILogger<PostRepository> _logger;
 		private readonly ISourceRepository _sourceRepository;
 		private readonly ICategoryRepository _categoryRepository;
 
-		public PostProcessor(string connectionString, ILogger<PostProcessor> logger, ISourceRepository sourceRepository, ICategoryRepository categoryRepository)
+		public PostRepository(string connectionString, ILogger<PostRepository> logger, ISourceRepository sourceRepository, ICategoryRepository categoryRepository)
 		{
 			_connectionString = connectionString;
 			_logger = logger;

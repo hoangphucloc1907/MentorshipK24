@@ -2,7 +2,7 @@
 
 namespace NewsAggregator.Repository
 {
-	public interface IPostProcessor
+	public interface IPostRepository
 	{
 		Task ConvertUrlToPosts(string url);
 	}
