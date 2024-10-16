@@ -29,5 +29,11 @@ namespace NewsAggregator.Service
             }
             return null;
         }
+
+        public int? AuthenticateAndGetUserId(string email, string password)
+        {
+            var user = AuthenticateUser(email, password);
+            return user?.Id;
+        }
     }
 }

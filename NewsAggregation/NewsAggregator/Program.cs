@@ -39,7 +39,8 @@ namespace NewsAggregator
 				var rssScraper = provider.GetRequiredService<IRssScraper>();
 				var postProcessor = provider.GetRequiredService<IPostRepository>();
 				var sourceRepository = provider.GetRequiredService<ISourceRepository>();
-				return new RssScraperHostedService(logger, rssScraper, postProcessor, sourceRepository);
+                var providerRepository = provider.GetRequiredService<IProviderRepository>();
+                return new RssScraperHostedService(logger, rssScraper, postProcessor, sourceRepository, providerRepository);
 			});
 
 			var app = builder.Build();

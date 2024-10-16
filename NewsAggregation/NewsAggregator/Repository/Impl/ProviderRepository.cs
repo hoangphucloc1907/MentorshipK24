@@ -13,6 +13,24 @@ namespace NewsAggregator.Repository.Impl
             _logger = logger;
         }
 
+        public async Task<List<string>> GetLinkProvider()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                var selectCommand = new SqlCommand("SELECT Link FROM Provider", connection);
+                var result = await selectCommand.ExecuteReaderAsync();
+
+                List<string> list = new List<string>();
+                while (await result.ReadAsync())
+                {
+                    list.Add(result.GetString(0));
+                }
+                return list;
+            }
+        }
+
         public async Task<int> GetOrInsertProvider(string url)
         {
             using (var connection = new SqlConnection(_connectionString))
