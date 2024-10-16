@@ -51,21 +51,13 @@ namespace NewsAggregator.Controllers
                 return BadRequest("Invalid login data.");
             }
 
-            var user = _userService.AuthenticateUser(request.Email, request.Password);
-            if (user == null)
+            var userId = _userService.AuthenticateAndGetUserId(request.Email, request.Password);
+            if (userId == null)
             {
                 return Unauthorized("Invalid email or password.");
             }
 
-            var response = new UserResponse
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Username = user.Username,
-                Role = user.Role
-            };
-
-            return Ok(response);
+            return Ok(new { UserId = userId });
         }
     }
 }
