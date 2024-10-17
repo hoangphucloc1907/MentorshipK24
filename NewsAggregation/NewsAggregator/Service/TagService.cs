@@ -12,14 +12,18 @@ namespace NewsAggregator.Service
             _connectionString = connectionString;
         }
 
-        public async Task<List<Tag>> GetTagsAsync()
+        public async Task<List<Tag>> GetTagsAsync(int pageNumber, int pageSize)
         {
             var tags = new List<Tag>();
 
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                var command = new SqlCommand("SELECT Id, TagName FROM Tag ORDER BY TagName", connection);
+
+                var offset = (pageNumber - 1) * pageSize;
+                var command = new SqlCommand("SELECT Id, TagName FROM Tag ORDER BY TagName OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY", connection);
+                command.Parameters.AddWithValue("@Offset", offset);
+                command.Parameters.AddWithValue("@PageSize", pageSize);
 
                 using (var reader = await command.ExecuteReaderAsync())
                 {

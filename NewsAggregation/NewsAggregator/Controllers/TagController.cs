@@ -20,21 +20,33 @@ namespace NewsAggregator.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TagGroup>>> GetTags()
+        public async Task<ActionResult<IEnumerable<TagGroup>>> GetTags(int pageNumber, int pageSize)
         {
-            var tags = await _tagService.GetTagsAsync();
+            var tags = await _tagService.GetTagsAsync(pageNumber, pageSize);
 
-            var groupedTags = tags
-                .GroupBy(tag => tag.TagName[0])
-                .Select(group => new TagGroup
+            var groupedTags = new Dictionary<char, List<Tag>>();
+
+            foreach (var tag in tags)
+            {
+                var initial = tag.TagName[0];
+
+                if (!groupedTags.ContainsKey(initial))
                 {
-                    Initial = group.Key,
-                    Tags = group.ToList()
-                })
-                .OrderBy(group => group.Initial)
-                .ToList();
+                    groupedTags[initial] = new List<Tag>();
+                }
 
-            return Ok(groupedTags);
+                groupedTags[initial].Add(tag);
+            }
+
+            var sortedTags = groupedTags.OrderBy(group => group.Key)
+                                        .Select(group => new TagGroup
+                                        {
+                                            Initial = group.Key,
+                                            Tags = group.Value
+                                        })
+                                        .ToList();
+
+            return Ok(sortedTags);
         }
 
         [HttpGet("popular")]
