@@ -1,4 +1,5 @@
 
+using NewsAggregator.Job;
 using NewsAggregator.Repository;
 using NewsAggregator.Repository.Impl;
 using NewsAggregator.Service;
@@ -43,7 +44,10 @@ namespace NewsAggregator
                 return new RssScraperHostedService(logger, rssScraper, postProcessor, sourceRepository, providerRepository);
 			});
 
-			var app = builder.Build();
+            // Configure Quartz
+            QuartzStartup.ConfigureQuartz(builder.Services);
+
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())

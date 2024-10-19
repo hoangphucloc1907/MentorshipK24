@@ -33,7 +33,7 @@ namespace NewsAggregator.Service
                     {
                         await _rssScraper.ScrapeAndStoreRssData(link);
                     }
-                    await ProcessSourceUrls();
+                    //await ProcessSourceUrls();
 
                     await Task.Delay(TimeSpan.FromHours(1), stoppingToken); // schedule
                 }
