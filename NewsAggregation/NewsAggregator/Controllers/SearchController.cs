@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using NewsAggregator.Entity;
 using NewsAggregator.Service;
 using System.Data.SqlClient;
+using System.Web.Http.OData;
 
 namespace NewsAggregator.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/[controller]")]
     [ApiController]
-    public class SearchController : ControllerBase
+    public class SearchController : ODataController
     {
         private readonly string _connectionString;
         private readonly SearchService _searchService;
@@ -20,33 +21,30 @@ namespace NewsAggregator.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult> Search(string searchTerm)
+        [EnableQuery]
+        public IQueryable<object> Search(string searchTerm)
         {
             var postsTask = GetPosts(searchTerm);
             var tagsTask = GetTags(searchTerm);
 
-            await Task.WhenAll(postsTask, tagsTask);
+            Task.WhenAll(postsTask, tagsTask).Wait();
 
-            var matchedPosts = _searchService.SearchPostsByTitle(searchTerm, postsTask.Result);
-            var matchedTags = _searchService.SearchTagsByName(searchTerm, tagsTask.Result);
+            var matchedPosts = _searchService.SearchPostsByTitle(searchTerm, postsTask.Result).AsQueryable();
+            var matchedTags = _searchService.SearchTagsByName(searchTerm, tagsTask.Result).AsQueryable();
 
-            var response = new
+            var response = matchedPosts.Select(post => new
             {
-                Posts = matchedPosts.Select(post => new
-                {
-                    post.Id,
-                    post.Title,
-                    post.ViewCount,
-                    post.Upvote
-                }),
-                Tags = matchedTags.Select(tag => new
-                {
-                    tag.Id,
-                    tag.TagName
-                })
-            };
+                post.Id,
+                post.Title,
+                post.ViewCount,
+                post.Upvote
+            }).Cast<object>().Concat(matchedTags.Select(tag => new
+            {
+                tag.Id,
+                tag.TagName
+            }).Cast<object>());
 
-            return Ok(response);
+            return response.AsQueryable();
         }
 
         private async Task<List<Post>> GetPosts(string searchTerm)
