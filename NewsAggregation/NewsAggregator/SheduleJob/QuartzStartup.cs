@@ -6,16 +6,26 @@ namespace NewsAggregator.Job
 {
     public class QuartzStartup
     {
-        public static void ConfigureQuartz(IServiceCollection services)
+        private readonly IConfiguration _configuration;
+
+        public QuartzStartup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public void ConfigureQuartz(IServiceCollection services)
         {
             services.AddSingleton<IJobFactory, SingletonJobFactory>();
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 
             // Add our job
             services.AddSingleton<FetchRssJob>();
+
+            var cronExpression = _configuration["Quartz:CronExpression"];
+
             services.AddSingleton(new JobSchedule(
                 jobType: typeof(FetchRssJob),
-                cronExpression: "0 7 23,0 * * ?")); // Run every day at 11:07pm and 12am
+                cronExpression: cronExpression)); // Run based on configuration
 
             services.AddHostedService<QuartzHostedService>();
         }
